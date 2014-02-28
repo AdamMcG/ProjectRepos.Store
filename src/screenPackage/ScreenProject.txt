@@ -1,0 +1,85 @@
+The screens done for 23/02/14 by Adam:
+
+V1 Screens:
+-Login-screen
+		The screen in which employees will first come across. 
+		This allows users to log onto our system and to access our features. 
+		We will have a Forgotten Password feature to reset these passwords. 
+		The login will fail if:
+			The employee number is incorrect.
+			the password is incorrect.
+			If both are incorrect. 
+		
+-Home Screen:
+			Following a successful login, employees will enter this screen at first. 
+			From here, the employee should have pathways to most of the other feature-screens. 
+			We will have buttons to lead to the different screens. 
+			We will have both a simple query search and an advanced search function.			
+				Admins are able to reach the add employee screen from here to add employees to the system.
+				Employees will be able to apply for sick leave from this screen. 
+-Add Screen
+			This is a screen in which admin-level users will add new staff to their databases. 
+			It will look similar to the account screen, but with editing enabled on names. 
+			This screen will only be accessible to those with admin privileges. 
+			Admins will be able to add contract details- such as contract length, contract commencing date, contract type. 
+			
+-Account Screen
+			This allows the employee to review their own information and 
+			give a description of themselves/ what their tasks consist of.
+			This also allows the staff themselves to delete the account. 
+			We may will also add an "update password link " to this screen.
+			Declares which level an employee is. 
+			Allows employees to view contract details. 
+			
+			
+-Team Screen
+		This is a manager-only screen. It allows them to build teams of different people for projects and the likes.
+		It denotes the position of the member in the team.
+		It is completed and added to the database through the "add" button.
+		It can be edited on the same screen by simply deleting member details. 
+
+Menu Bar
+		The menu bar which grazes atop each screen allows
+		the user short-cuts to the important sections on the system.
+		Features a help shortcut, which links the employee to a User Manual to our system. 
+		
+Advanced Search Screen 
+		This screen allows the Employee to specify different query requirements.
+		As of currently, we have three SEARCH BY values: By employee  first name, Surname and employee type. These are basic values.
+		The system also automatically outputs results in Ascending order.
+		However, we are also adding a GROUP BY features. The values are: Descending, Employee ID. 
+		
+
+Forgotten Password Screen 
+		This screen allows the employee to choose which method they use to reset their passwords. 
+		The two selections are: Answer your set security question.
+											Send a link in an email to reset it. 
+											
+		This screen will be very similar to the other login and smaller screens
+		
+
+Resetting Password Screen
+		This is the simple screen to reset your password. 
+		You enter the new password twice. 
+		If both match, the database will save the new password. 
+		Else, the match will fail. 
+		
+Contract information Screen
+		This displays a summarised version of the contract made between the employee and the company.
+		The system will display: The contract length, the contract  type and the commencement of the contract.
+		
+		
+Contact Information Screen
+		This will display the contact information, such as the phone number, email address and so on.
+		this will be then inputed into by the staff themselves, as phone numbers and email addresses can change. 
+		
+		
+Leave application Screen
+				These are a set of screen which allow user to apply for different types of leave. 
+				The three type of leave are:
+														Sick Leave
+														Holiday Leave
+														General Leave.
+				This allows the user to submit to different screens, depending on the reason. 
+				It also allows the user to pick one particular- or all- groups that they are a member of to message. 
+				This makes for an ease of use for notifying their managers. 
