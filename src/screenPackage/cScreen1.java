@@ -99,12 +99,19 @@ public class cScreen1 {
 		textField_2.setColumns(10);
 		
 		JButton btnSave = new JButton("Exit");
+		btnSave.setBackground(new Color(255, 255, 204));
 		btnSave.setBounds(138, 326, 89, 23);
 		panel.add(btnSave);
 		
 		JButton btnEditContract = new JButton("Edit Contract ");
+		btnEditContract.setBackground(new Color(255, 255, 204));
 		btnEditContract.setBounds(397, 56, 133, 20);
 		panel.add(btnEditContract);
+		
+		JButton btnViewHardcopy = new JButton("View Hardcopy");
+		btnViewHardcopy.setBackground(new Color(255, 255, 204));
+		btnViewHardcopy.setBounds(397, 107, 133, 23);
+		panel.add(btnViewHardcopy);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);

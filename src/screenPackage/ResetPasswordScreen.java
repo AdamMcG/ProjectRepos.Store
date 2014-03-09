@@ -6,20 +6,27 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+
 import java.awt.Color;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 
 
-public class ResetPasswordScreen extends JFrame {
+public class ResetPasswordScreen extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
-
+	private JLabel passwordLabel1, passwordLabel2;
+	private JButton cancel, save;
 	/**
 	 * Launch the application.
 	 */
@@ -40,17 +47,11 @@ public class ResetPasswordScreen extends JFrame {
 	 * Create the application.
 	 */
 	public ResetPasswordScreen() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(100, 100, 647, 455);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -64,29 +65,32 @@ public class ResetPasswordScreen extends JFrame {
 		label.setBounds(10, 34, 153, 21);
 		panel.add(label);
 		
-		JLabel lblNewPassword = new JLabel("New Password:");
-		lblNewPassword.setBounds(10, 133, 102, 17);
-		panel.add(lblNewPassword);
+		passwordLabel1 = new JLabel("New Password:");
+		passwordLabel1.setBounds(10, 133, 102, 17);
+		panel.add(passwordLabel1);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(168, 131, 125, 20);
 		panel.add(passwordField);
 		
-		JLabel lblRepeatPasswor = new JLabel("Repeat Password");
-		lblRepeatPasswor.setBounds(10, 173, 102, 28);
-		panel.add(lblRepeatPasswor);
+		passwordLabel2 = new JLabel("Repeat Password");
+		passwordLabel2.setBounds(10, 173, 102, 28);
+		panel.add(passwordLabel2);
 		
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setBounds(168, 177, 125, 20);
 		panel.add(passwordField_1);
 		
-		JButton btnNewButton = new JButton("Save");
-		btnNewButton.setBounds(74, 298, 89, 23);
-		panel.add(btnNewButton);
+		save = new JButton("Save");
+		save.setBounds(74, 298, 89, 23);
+		panel.add(save);
+		save.addActionListener(this);
 		
-		JButton btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.setBounds(204, 298, 89, 23);
-		panel.add(btnNewButton_1);
+		cancel = new JButton("Cancel");
+		cancel.setBounds(204, 298, 89, 23);
+		panel.add(cancel);
+		cancel.addActionListener(this);
+		
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -106,5 +110,19 @@ public class ResetPasswordScreen extends JFrame {
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setForeground(Color.BLACK);
 		menuBar.add(mnHelp);
+		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == cancel)
+		{
+			System.exit(DISPOSE_ON_CLOSE);
+		}
+		else if(e.getSource() == save)
+		{
+			
+		}
 	}
 }

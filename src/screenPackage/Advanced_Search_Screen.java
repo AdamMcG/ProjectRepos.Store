@@ -23,7 +23,6 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-
 public class Advanced_Search_Screen {
 
 	private JFrame frame;
@@ -49,79 +48,75 @@ public class Advanced_Search_Screen {
 	 * Create the application.
 	 */
 	public Advanced_Search_Screen() {
-		initialize();
-	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(100, 100, 682, 567);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.setBounds(31, 31, 567, 420);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
-		
+
 		textField = new JTextField();
 		textField.setBounds(116, 361, 230, 32);
 		panel.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel label = new JLabel("McRoched Industries");
 		label.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
 		label.setBounds(10, 11, 181, 32);
 		panel.add(label);
-		
+
 		JButton btnNewButton = new JButton("Search");
 		btnNewButton.setBackground(new Color(255, 255, 204));
 		btnNewButton.setBounds(369, 360, 89, 34);
 		panel.add(btnNewButton);
-		
+
 		JLabel lblSearchBy = new JLabel("Search By: ");
 		lblSearchBy.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblSearchBy.setBounds(61, 72, 76, 34);
 		panel.add(lblSearchBy);
-		
+
 		JLabel lblDisplayBy = new JLabel("Display By: ");
 		lblDisplayBy.setBounds(61, 249, 64, 32);
 		panel.add(lblDisplayBy);
-		
+
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Descending");
 		rdbtnNewRadioButton_1.setBackground(new Color(255, 255, 204));
 		rdbtnNewRadioButton_1.setBounds(134, 254, 146, 32);
 		panel.add(rdbtnNewRadioButton_1);
-		
+
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Employee Number");
 		rdbtnNewRadioButton_2.setBackground(new Color(255, 255, 204));
 		rdbtnNewRadioButton_2.setBounds(134, 305, 146, 32);
 		panel.add(rdbtnNewRadioButton_2);
-		
+
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBackground(new Color(255, 255, 204));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"   ", "Employee number", "first name", "surname", "Department"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "   ",
+				"Employee number", "first name", "surname", "Department" }));
 		comboBox.setBounds(144, 119, 202, 20);
 		panel.add(comboBox);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
-		
+
 		JMenu mnNewMenu = new JMenu("Account");
 		mnNewMenu.setForeground(Color.BLACK);
 		menuBar.add(mnNewMenu);
-		
+
 		JMenu mnNewMenu_1 = new JMenu("Team");
 		mnNewMenu_1.setForeground(Color.BLACK);
 		menuBar.add(mnNewMenu_1);
-		
+
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setForeground(Color.BLACK);
 		menuBar.add(mnHelp);
+		frame.setVisible(true);
 	}
 }

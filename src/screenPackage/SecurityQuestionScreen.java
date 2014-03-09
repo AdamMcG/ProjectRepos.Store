@@ -4,52 +4,34 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 
-public class SecurityQuestionScreen extends JFrame {
+public class SecurityQuestionScreen extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JButton save, cancel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SecurityQuestionScreen window = new SecurityQuestionScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public SecurityQuestionScreen() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(100, 100, 635, 448);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -82,13 +64,15 @@ public class SecurityQuestionScreen extends JFrame {
 		lblAnswer.setBounds(30, 200, 133, 17);
 		panel.add(lblAnswer);
 		
-		JButton btnNewButton = new JButton("Save");
-		btnNewButton.setBounds(105, 314, 89, 23);
-		panel.add(btnNewButton);
+		 save = new JButton("Save");
+		save.setBounds(105, 314, 89, 23);
+		panel.add(save);
+		save.addActionListener(this);
 		
-		JButton btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.setBounds(264, 314, 89, 23);
-		panel.add(btnNewButton_1);
+		cancel = new JButton("Cancel");
+		cancel.setBounds(264, 314, 89, 23);
+		panel.add(cancel);
+		cancel.addActionListener(this);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -108,5 +92,19 @@ public class SecurityQuestionScreen extends JFrame {
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setForeground(Color.BLACK);
 		menuBar.add(mnHelp);
+		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == save)
+		{
+			
+		}
+		else if(e.getSource() == cancel)
+		{
+			System.exit(DISPOSE_ON_CLOSE);
+		}
 	}
 }

@@ -20,11 +20,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class loginScreen extends JFrame {
+public class loginScreen extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
+	private JButton login,forgotten;
 
 	/**
 	 * Launch the application.
@@ -58,7 +59,7 @@ public class loginScreen extends JFrame {
 		frame.setForeground(Color.RED);
 		frame.getContentPane().setForeground(Color.GREEN);
 		frame.setBounds(100, 100, 510, 404);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -86,15 +87,13 @@ public class loginScreen extends JFrame {
 		lblPassword.setBounds(41, 150, 72, 17);
 		panel.add(lblPassword);
 		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnLogin.setBackground(new Color(255, 255, 204));
-		btnLogin.setForeground(Color.BLACK);
-		btnLogin.setBounds(41, 201, 86, 23);
-		panel.add(btnLogin);
+		 login = new JButton("Login");
+		login.addActionListener(this);
+		
+		login.setBackground(new Color(255, 255, 204));
+		login.setForeground(Color.BLACK);
+		login.setBounds(41, 201, 86, 23);
+		panel.add(login);
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(137, 149, 101, 20);
@@ -105,11 +104,11 @@ public class loginScreen extends JFrame {
 		lblNewLabel.setBounds(24, 24, 181, 32);
 		panel.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Forgot Password?");
-		btnNewButton.setBackground(new Color(102, 255, 255));
-		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setBounds(68, 262, 119, 32);
-		panel.add(btnNewButton);
+		forgotten = new JButton("Forgot Password?");
+		forgotten.setBackground(new Color(102, 255, 255));
+		forgotten.setForeground(Color.BLACK);
+		forgotten.setBounds(68, 262, 119, 32);
+		panel.add(forgotten);
 		
 		JButton btnCancel = new JButton("cancel");
 		btnCancel.setBackground(new Color(255, 255, 204));
@@ -133,5 +132,14 @@ public class loginScreen extends JFrame {
 				popup.show(e.getComponent(), e.getX(), e.getY());
 			}
 		});
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e)
+	{
+		if(e.getSource() == login){
+			
+			HomeScreen h = new HomeScreen();
+		}
 	}
 }
