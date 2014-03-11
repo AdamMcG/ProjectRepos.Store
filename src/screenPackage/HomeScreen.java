@@ -132,6 +132,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == addButton) {
 			// new AddScreen();
+			frame.setVisible(false);
 			AddScreen addScreen = new AddScreen();
 		}
 
@@ -141,17 +142,27 @@ public class HomeScreen extends JFrame implements ActionListener {
 		}
 
 		else if (ae.getSource() == advancedSearch) {
+			frame.setVisible(false);
 			Advanced_Search_Screen A = new Advanced_Search_Screen();
 
 		}
 
 		else if (ae.getSource() == teamRoster) {
+			frame.setVisible(false);
 			TeamScreen T = new TeamScreen();
 
 		}
 
-		else if (ae.getSource() == leaveApp) {
+		else if (ae.getSource() == leaveApp) 
+		{
+			frame.setVisible(false);
 			LeaveSelectionScreen L = new LeaveSelectionScreen();
+		}
+		else if (ae.getSource() == updateEmployee) {
+			String b = JOptionPane.showInputDialog(null,
+					"Enter the name of contact you wish to update. ",
+					"EmployeeRoster", JOptionPane.QUESTION_MESSAGE);
+
 		}
 
 		else if (ae.getSource() == deleteEmployee) {

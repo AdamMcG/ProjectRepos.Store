@@ -19,11 +19,13 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class TeamScreen extends JFrame {
+public class TeamScreen extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JTextField textField;
@@ -32,31 +34,12 @@ public class TeamScreen extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TeamScreen window = new TeamScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	private JButton add, cancel;
 	public TeamScreen() {
 
 		frame = new JFrame();
 		frame.setBounds(100, 100, 819, 628);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
@@ -178,17 +161,18 @@ public class TeamScreen extends JFrame {
 		panel_1.add(label);
 		label.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
 
-		JButton btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.setBounds(193, 425, 89, 23);
-		panel_1.add(btnNewButton_1);
-		btnNewButton_1.setBackground(new Color(255, 255, 204));
-		btnNewButton_1.setForeground(Color.BLACK);
+		cancel = new JButton("Cancel");
+		cancel.setBounds(193, 425, 89, 23);
+		panel_1.add(cancel);
+		cancel.setBackground(new Color(255, 255, 204));
+		cancel.setForeground(Color.BLACK);
+		cancel.addActionListener(this);
 
-		JButton btnNewButton = new JButton("Add");
-		btnNewButton.setBounds(27, 425, 89, 23);
-		panel_1.add(btnNewButton);
-		btnNewButton.setBackground(new Color(255, 255, 204));
-		btnNewButton.setForeground(Color.BLACK);
+		add = new JButton("Add");
+		add.setBounds(27, 425, 89, 23);
+		panel_1.add(add);
+		add.setBackground(new Color(255, 255, 204));
+		add.setForeground(Color.BLACK);
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -205,5 +189,17 @@ public class TeamScreen extends JFrame {
 		mnNewMenu_3.setForeground(Color.BLACK);
 		menuBar.add(mnNewMenu_3);
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ae) 
+	{
+		if(ae.getSource() == cancel)
+		{
+			HomeScreen s = new HomeScreen();
+			frame.setVisible(false);
+			
+		}
+		
 	}
 }

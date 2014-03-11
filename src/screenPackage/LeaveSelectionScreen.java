@@ -1,42 +1,35 @@
 package screenPackage;
 
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JFrame;
+
 import java.awt.Color;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 
-public class LeaveSelectionScreen {
-
+public class LeaveSelectionScreen extends JFrame implements ActionListener{
 	private JFrame frame;
+	private JButton continue1, cancel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LeaveSelectionScreen window = new LeaveSelectionScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public LeaveSelectionScreen() {
 
+		
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.getContentPane().setLayout(null);
@@ -64,19 +57,21 @@ public class LeaveSelectionScreen {
 		rdbtnGeneralLeave.setBounds(33, 188, 147, 43);
 		panel.add(rdbtnGeneralLeave);
 
-		JButton btnNewButton = new JButton("Continue");
-		btnNewButton.setBackground(new Color(255, 255, 204));
-		btnNewButton.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnNewButton.setBounds(44, 311, 89, 43);
-		panel.add(btnNewButton);
+		continue1 = new JButton("Continue");
+		continue1.setBackground(new Color(255, 255, 204));
+		continue1.setFont(new Font("Arial", Font.PLAIN, 14));
+		continue1.setBounds(44, 311, 89, 43);
+		panel.add(continue1);
+		continue1.addActionListener(this);
 
-		JButton btnNewButton_1 = new JButton("Cancel");
-		btnNewButton_1.setBackground(new Color(255, 255, 204));
-		btnNewButton_1.setFont(new Font("Arial", Font.PLAIN, 14));
-		btnNewButton_1.setBounds(302, 311, 100, 43);
-		panel.add(btnNewButton_1);
+		cancel = new JButton("Cancel");
+		cancel.setBackground(new Color(255, 255, 204));
+		cancel.setFont(new Font("Arial", Font.PLAIN, 14));
+		cancel.setBounds(302, 311, 100, 43);
+		panel.add(cancel);
+		cancel.addActionListener(this);
 		frame.setBounds(100, 100, 574, 453);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -93,5 +88,23 @@ public class LeaveSelectionScreen {
 		mnHelp.setForeground(Color.BLACK);
 		menuBar.add(mnHelp);
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ae)
+	{
+		if(ae.getSource() == continue1)
+		{
+			frame.setVisible(false);
+			LeaveAppScreen a = new LeaveAppScreen();
+		}
+		else if(ae.getSource() == cancel)
+		{
+			HomeScreen s = new HomeScreen();
+			frame.setVisible(false);
+			
+		}
+		
+		
 	}
 }

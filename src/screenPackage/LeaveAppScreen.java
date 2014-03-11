@@ -4,10 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JTextField;
@@ -17,43 +23,24 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
 
-public class LeaveAppScreen {
+public class LeaveAppScreen extends JFrame implements ActionListener{
 
-	private JFrame frame;
+	
 	private JTextField textField_1;
 	private JTextField textField;
+	private JButton cancel, save;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LeaveAppScreen window = new LeaveAppScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
 	public LeaveAppScreen() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
+	
+		JFrame frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(100, 100, 666, 569);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -87,15 +74,15 @@ public class LeaveAppScreen {
 		textArea.setBounds(113, 171, 434, 99);
 		panel.add(textArea);
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(421, 390, 89, 23);
-		panel.add(btnCancel);
-		btnCancel.setBackground(new Color(255, 255, 204));
+		cancel = new JButton("Cancel");
+		cancel.setBounds(421, 390, 89, 23);
+		panel.add(cancel);
+		cancel.setBackground(new Color(255, 255, 204));
 		
-		JButton btnSend = new JButton("Continue");
-		btnSend.setBounds(206, 385, 89, 32);
-		panel.add(btnSend);
-		btnSend.setBackground(new Color(255, 255, 204));
+		save = new JButton("Continue");
+		save.setBounds(206, 385, 89, 32);
+		panel.add(save);
+		save.setBackground(new Color(255, 255, 204));
 		
 		JLabel lblMsgTitle = new JLabel("Num. Days\r\n");
 		lblMsgTitle.setBounds(38, 120, 65, 32);
@@ -138,5 +125,14 @@ public class LeaveAppScreen {
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setForeground(Color.BLACK);
 		menuBar.add(mnHelp);
+		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getSource() == cancel)
+			System.exit(DISPOSE_ON_CLOSE);
+		
 	}
 }

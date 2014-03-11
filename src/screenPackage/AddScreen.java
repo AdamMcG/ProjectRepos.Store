@@ -226,7 +226,8 @@ public class AddScreen extends JFrame implements ActionListener {
 	{
 		if(ae.getSource() == cancel)
 		{
-			dispose();
+			frame.setVisible(false);
+			HomeScreen h = new HomeScreen();
 			
 		}
 		

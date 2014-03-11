@@ -31,25 +31,7 @@ public class AccountScreen extends JFrame implements ActionListener {
 	private JTextField textField_4;
 	private JButton security, contract, password;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AccountScreen window = new AccountScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
+	
 	public AccountScreen() {
 
 		JFrame frame = new JFrame();
@@ -161,10 +143,12 @@ public class AccountScreen extends JFrame implements ActionListener {
 		password.setBounds(332, 18, 143, 23);
 		panel.add(password);
 		password.addActionListener(this);
+		
 		contract = new JButton("Contract details");
 		contract.setBounds(332, 82, 143, 23);
 		panel.add(contract);
-
+		contract.addActionListener(this);
+		
 		security = new JButton("Set Security Question");
 		security.setBounds(332, 124, 143, 23);
 		panel.add(security);
@@ -210,11 +194,14 @@ public class AccountScreen extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == security) {
+			frame.setVisible(false);
 			SecurityQuestionScreen s = new SecurityQuestionScreen();
 
 		} else if (ae.getSource() == password) {
+			frame.setVisible(false);
 			ResetPasswordScreen R = new ResetPasswordScreen();
 		} else if (ae.getSource() == contract) {
+			//frame.setVisible(false);
 			cScreen1 C = new cScreen1();
 
 		}

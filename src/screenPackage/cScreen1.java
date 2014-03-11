@@ -4,55 +4,35 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.Color;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
 
-public class cScreen1 {
+public class cScreen1 extends JFrame implements ActionListener{
 
-	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JButton exit;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					cScreen1 window = new cScreen1();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 * @wbp.parser.entryPoint
-	 */
 	public cScreen1() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
+	
+		JFrame frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(100, 100, 853, 577);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -98,10 +78,11 @@ public class cScreen1 {
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
-		JButton btnSave = new JButton("Exit");
-		btnSave.setBackground(new Color(255, 255, 204));
-		btnSave.setBounds(138, 326, 89, 23);
-		panel.add(btnSave);
+		exit = new JButton("Exit");
+		exit.setBackground(new Color(255, 255, 204));
+		exit.setBounds(138, 326, 89, 23);
+		panel.add(exit);
+		exit.addActionListener(this);
 		
 		JButton btnEditContract = new JButton("Edit Contract ");
 		btnEditContract.setBackground(new Color(255, 255, 204));
@@ -126,6 +107,17 @@ public class cScreen1 {
 		
 		JMenu mnHelp = new JMenu("Help");
 		mnHelp.setForeground(Color.BLACK);
-		menuBar.add(mnHelp);
+	menuBar.add(mnHelp);
+	frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ae) 
+	{
+		if(ae.getSource() == exit)
+		{
+			dispose();
+		}
+		
 	}
 }

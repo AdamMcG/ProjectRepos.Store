@@ -47,13 +47,7 @@ public class loginScreen extends JFrame implements ActionListener {
 	 * Create the application.
 	 */
 	public loginScreen() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setForeground(Color.RED);
@@ -138,7 +132,7 @@ public class loginScreen extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == login){
-			
+			frame.setVisible(false);
 			HomeScreen h = new HomeScreen();
 		}
 	}
