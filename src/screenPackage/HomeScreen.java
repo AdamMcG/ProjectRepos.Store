@@ -106,6 +106,11 @@ public class HomeScreen extends JFrame implements ActionListener {
 		deleteEmployee.setBackground(new Color(255, 153, 255));
 		deleteEmployee.setBounds(234, 329, 102, 30);
 		panel.add(deleteEmployee);
+		
+		JButton btnNewButton = new JButton("Logout");
+		btnNewButton.setBackground(new Color(255, 255, 204));
+		btnNewButton.setBounds(395, 43, 102, 23);
+		panel.add(btnNewButton);
 		deleteEmployee.addActionListener(this);
 		frame.setVisible(true);
 	}

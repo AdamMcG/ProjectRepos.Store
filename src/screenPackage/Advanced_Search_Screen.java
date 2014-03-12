@@ -1,5 +1,7 @@
 package screenPackage;
 
+import hardCodePackage.User;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -12,6 +14,8 @@ import java.awt.Panel;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
@@ -23,10 +27,11 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class Advanced_Search_Screen {
+public class Advanced_Search_Screen extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JTextField textField;
+	private JButton search, cancel;
 
 	/**
 	 * Launch the application.
@@ -63,7 +68,7 @@ public class Advanced_Search_Screen {
 		panel.setLayout(null);
 
 		textField = new JTextField();
-		textField.setBounds(116, 361, 230, 32);
+		textField.setBounds(131, 308, 230, 32);
 		panel.add(textField);
 		textField.setColumns(10);
 
@@ -72,31 +77,38 @@ public class Advanced_Search_Screen {
 		label.setBounds(10, 11, 181, 32);
 		panel.add(label);
 
-		JButton btnNewButton = new JButton("Search");
-		btnNewButton.setBackground(new Color(255, 255, 204));
-		btnNewButton.setBounds(369, 360, 89, 34);
-		panel.add(btnNewButton);
-
+		search = new JButton("Search");
+		search.setBackground(new Color(255, 255, 204));
+		search.setBounds(371, 307, 89, 34);
+		panel.add(search);
+		
+		
+		
+		cancel = new JButton("cancel");
+		cancel.setBackground(new Color(255, 255, 204));
+		cancel.setBounds(227, 371, 80, 32);
+		panel.add(cancel);
+		
 		JLabel lblSearchBy = new JLabel("Search By: ");
 		lblSearchBy.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblSearchBy.setBounds(61, 72, 76, 34);
 		panel.add(lblSearchBy);
 
 		JLabel lblDisplayBy = new JLabel("Display By: ");
-		lblDisplayBy.setBounds(61, 249, 64, 32);
+		lblDisplayBy.setBounds(61, 204, 64, 32);
 		panel.add(lblDisplayBy);
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Descending");
 		rdbtnNewRadioButton_1.setBackground(new Color(255, 255, 204));
-		rdbtnNewRadioButton_1.setBounds(134, 254, 146, 32);
+		rdbtnNewRadioButton_1.setBounds(131, 204, 146, 32);
 		panel.add(rdbtnNewRadioButton_1);
 
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Employee Number");
 		rdbtnNewRadioButton_2.setBackground(new Color(255, 255, 204));
-		rdbtnNewRadioButton_2.setBounds(134, 305, 146, 32);
+		rdbtnNewRadioButton_2.setBounds(131, 253, 146, 32);
 		panel.add(rdbtnNewRadioButton_2);
 
-		JComboBox comboBox = new JComboBox();
+		JComboBox<User> comboBox = new JComboBox();
 		comboBox.setBackground(new Color(255, 255, 204));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] { "   ",
 				"Employee number", "first name", "surname", "Department" }));
@@ -118,5 +130,11 @@ public class Advanced_Search_Screen {
 		mnHelp.setForeground(Color.BLACK);
 		menuBar.add(mnHelp);
 		frame.setVisible(true);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

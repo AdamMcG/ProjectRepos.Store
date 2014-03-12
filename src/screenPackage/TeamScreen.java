@@ -1,5 +1,7 @@
 package screenPackage;
 
+import hardCodePackage.User;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -34,7 +36,7 @@ public class TeamScreen extends JFrame implements ActionListener {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private JButton add, cancel;
+	private JButton add, cancel,delete;
 	public TeamScreen() {
 
 		frame = new JFrame();
@@ -121,15 +123,15 @@ public class TeamScreen extends JFrame implements ActionListener {
 		comboBox_4.setBounds(390, 394, 220, 20);
 		panel_1.add(comboBox_4);
 
-		JComboBox comboBox_5 = new JComboBox();
+		JComboBox<User> comboBox_5 = new JComboBox();
 		comboBox_5.setModel(new DefaultComboBoxModel(new String[] { "Group1",
 				"Group2", "Group3", "Group4" }));
 		comboBox_5.setBounds(510, 27, 125, 24);
 		panel_1.add(comboBox_5);
 
-		JButton btnNewButton_2 = new JButton("Delete Group");
-		btnNewButton_2.setBounds(510, 473, 109, 20);
-		panel_1.add(btnNewButton_2);
+		delete = new JButton("Delete Group");
+		delete.setBounds(510, 473, 109, 20);
+		panel_1.add(delete);
 
 		JLabel lblGroupName = new JLabel("Group Name:");
 		lblGroupName.setFont(new Font("Arial", Font.PLAIN, 11));
@@ -197,7 +199,7 @@ public class TeamScreen extends JFrame implements ActionListener {
 		if(ae.getSource() == cancel)
 		{
 			HomeScreen s = new HomeScreen();
-			frame.setVisible(false);
+			frame.dispose();
 			
 		}
 		

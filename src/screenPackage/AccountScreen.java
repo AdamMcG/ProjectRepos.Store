@@ -34,7 +34,7 @@ public class AccountScreen extends JFrame implements ActionListener {
 	
 	public AccountScreen() {
 
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setForeground(Color.RED);
 		frame.getContentPane().setForeground(Color.GREEN);
@@ -194,14 +194,14 @@ public class AccountScreen extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == security) {
-			frame.setVisible(false);
 			SecurityQuestionScreen s = new SecurityQuestionScreen();
+			frame.dispose();
 
 		} else if (ae.getSource() == password) {
-			frame.setVisible(false);
 			ResetPasswordScreen R = new ResetPasswordScreen();
+			frame.dispose();
 		} else if (ae.getSource() == contract) {
-			//frame.setVisible(false);
+			frame.dispose();
 			cScreen1 C = new cScreen1();
 
 		}

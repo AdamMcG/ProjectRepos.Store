@@ -4,21 +4,28 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 
-public class ContactScreen {
+public class ContactScreen extends JFrame implements ActionListener {
 
-	JFrame frame;
+	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JButton exit; 
 
 	/**
 	 * Launch the application.
@@ -40,13 +47,7 @@ public class ContactScreen {
 	 * Create the application.
 	 */
 	public ContactScreen() {
-		initialize();
-	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(100, 100, 833, 464);
@@ -89,10 +90,11 @@ public class ContactScreen {
 		lblEmailadress.setBounds(42, 194, 89, 32);
 		panel.add(lblEmailadress);
 		
-		JButton btnNewButton = new JButton("Exit");
-		btnNewButton.setBackground(new Color(255, 255, 204));
-		btnNewButton.setBounds(71, 290, 89, 44);
-		panel.add(btnNewButton);
+		exit = new JButton("Exit");
+		exit.setBackground(new Color(255, 255, 204));
+		exit.setBounds(71, 290, 89, 44);
+		panel.add(exit);
+		exit.addActionListener(this);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -109,5 +111,15 @@ public class ContactScreen {
 		mnHelp.setForeground(new Color(0, 0, 0));
 		mnHelp.setBackground(new Color(255, 255, 255));
 		menuBar.add(mnHelp);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent ae) 
+	{
+		if(ae.getSource() == exit)
+		{
+			frame.dispose();
+		}
+		
 	}
 }
