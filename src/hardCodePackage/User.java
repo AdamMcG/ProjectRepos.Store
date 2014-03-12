@@ -2,8 +2,7 @@ package hardCodePackage;
 
 import java.util.Random;
 
-public abstract class User 
-{
+public class User {
 	private String name;
 	private int employeeNumber;
 	private int birthdate;
@@ -13,10 +12,11 @@ public abstract class User
 	private double contractLength;
 	private String department;
 	private String password;
-	
-	public User(String name, int birthdate, String gender, String nationality, double contractLength, String employeeType, String password, String department)
-	{
-		this.setName(name); 
+
+	public User(String name, int birthdate, String gender, String nationality,
+			double contractLength, String employeeType, String password,
+			String department) {
+		this.setName(name);
 		this.setGender(gender);
 		this.setBirthdate(birthdate);
 		this.setNationality(nationality);
@@ -26,28 +26,23 @@ public abstract class User
 	}
 
 	public String getEmployeeNumber() {
-		String empNum= String.valueOf(this.employeeNumber);
+		String empNum = String.valueOf(this.employeeNumber);
 		return empNum;
 	}
 
-	public void setEmployeeNumber(String employeeNumber) 
-	{
+	public void setEmployeeNumber(String employeeNumber) {
 		Random rand = new Random();
 		int temp = rand.nextInt(100);
-		if(getEmployeeType().equals("manager"))
-		{
+		if (getEmployeeType().equals("manager")) {
 			this.employeeNumber = 155000 + temp;
-		}
-		else if(getEmployeeType().equals("Admin"))
-		{
-			
+		} else if (getEmployeeType().equals("Admin")) {
+
 			this.employeeNumber = 188000 + temp;
 		}
-		
-		else
-		{
+
+		else {
 			this.employeeNumber = 122000 + temp;
-			
+
 		}
 	}
 

@@ -1,5 +1,8 @@
 package screenPackage;
 
+import hardCodePackage.EmployeeRegister;
+import hardCodePackage.User;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
@@ -20,6 +23,7 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class loginScreen extends JFrame implements ActionListener {
 
@@ -27,41 +31,23 @@ public class loginScreen extends JFrame implements ActionListener {
 	private JTextField emField;
 	private JPasswordField passwordField;
 	private JButton login, forgotten;
+	private EmployeeRegister EList;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					loginScreen window = new loginScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
-	public loginScreen() {
-
-		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.DARK_GRAY);
-		frame.setForeground(Color.RED);
-		frame.getContentPane().setForeground(Color.GREEN);
-		frame.setBounds(100, 100, 510, 404);
-		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	public loginScreen(EmployeeRegister U) {
+		EList = U;
+		setFrame(new JFrame());
+		getFrame().getContentPane().setBackground(Color.DARK_GRAY);
+		getFrame().setForeground(Color.RED);
+		getFrame().getContentPane().setForeground(Color.GREEN);
+		getFrame().setBounds(100, 100, 510, 404);
+		getFrame().setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		getFrame().getContentPane().setLayout(null);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setForeground(Color.RED);
 		panel.setBounds(41, 23, 392, 322);
-		frame.getContentPane().add(panel);
+		getFrame().getContentPane().add(panel);
 		panel.setLayout(null);
 
 		emField = new JTextField();
@@ -137,16 +123,19 @@ public class loginScreen extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == login) {
-			String test = passwordField.getText();
-			if (emField.getText().equals("aa") && test.equals("123")) {
-				frame.dispose();
+
+		
+				getFrame().dispose();
 				HomeScreen h = new HomeScreen();
 			}
-
-			else {
-				String b = JOptionPane
-						.showInputDialog("Incorrect password/Employee number");
-			}
 		}
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	public JFrame setFrame(JFrame frame) {
+		this.frame = frame;
+		return frame;
 	}
 }
