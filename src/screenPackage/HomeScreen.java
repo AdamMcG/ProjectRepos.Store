@@ -26,25 +26,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 	JButton addButton, deleteButton, teamRoster, leaveApp, account,
 			updateEmployee, advancedSearch, deleteEmployee;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					HomeScreen window = new HomeScreen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the application.
-	 */
 	public HomeScreen() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);

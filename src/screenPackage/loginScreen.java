@@ -26,7 +26,6 @@ public class loginScreen extends JFrame implements ActionListener {
 	private JTextField textField;
 	private JPasswordField passwordField;
 	private JButton login,forgotten;
-
 	/**
 	 * Launch the application.
 	 */
