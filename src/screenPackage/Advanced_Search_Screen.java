@@ -33,25 +33,6 @@ public class Advanced_Search_Screen extends JFrame implements ActionListener {
 	private JTextField textField;
 	private JButton search, cancel;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Advanced_Search_Screen window = new Advanced_Search_Screen();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 */
 	public Advanced_Search_Screen() {
 
 		frame = new JFrame();
@@ -59,7 +40,7 @@ public class Advanced_Search_Screen extends JFrame implements ActionListener {
 		frame.setBounds(100, 100, 682, 567);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-
+		frame.setResizable(false);
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -133,8 +114,12 @@ public class Advanced_Search_Screen extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent ae) 
+	{
+		if(ae.getSource()==cancel)
+		{
+			frame.dispose();
+			HomeScreen h = new HomeScreen();
+		}
 	}
 }

@@ -123,12 +123,17 @@ public class loginScreen extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == login) {
-
-		
+			if (emField.getText().equals("a")
+					&& passwordField.getText().equals("123")) {
 				getFrame().dispose();
 				HomeScreen h = new HomeScreen();
+			} else {
+				JOptionPane.showMessageDialog(null,
+						"Incorrect password or username! ",
+						"EmployeeRoster", JOptionPane.PLAIN_MESSAGE);
 			}
 		}
+	}
 
 	public JFrame getFrame() {
 		return frame;

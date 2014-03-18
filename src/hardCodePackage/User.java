@@ -5,15 +5,14 @@ import java.util.Random;
 public class User {
 	private String name;
 	private int employeeNumber;
-	private int birthdate;
+	private String birthdate;
 	private String gender;
 	private String nationality;
 	private String employeeType;
 	private double contractLength;
-	private String department;
-	private String password;
+	private String department,password;
 
-	public User(String name, int birthdate, String gender, String nationality,
+	public User(String name, String birthdate, String gender, String nationality,
 			double contractLength, String employeeType, String password,
 			String department) {
 		this.setName(name);
@@ -31,19 +30,19 @@ public class User {
 	}
 
 	public void setEmployeeNumber(String employeeNumber) {
-		Random rand = new Random();
-		int temp = rand.nextInt(100);
+		int temp = 1;
 		if (getEmployeeType().equals("manager")) {
-			this.employeeNumber = 155000 + temp;
+			this.employeeNumber = 150000 + temp;
 		} else if (getEmployeeType().equals("Admin")) {
 
-			this.employeeNumber = 188000 + temp;
+			this.employeeNumber = 180000 + temp;
 		}
 
 		else {
-			this.employeeNumber = 122000 + temp;
+			this.employeeNumber = 120000 + temp;
 
 		}
+		temp++;
 	}
 
 	public String getEmployeeType() {
@@ -62,11 +61,11 @@ public class User {
 		this.name = name;
 	}
 
-	public int getBirthdate() {
+	public String getBirthdate() {
 		return birthdate;
 	}
 
-	public void setBirthdate(int birthdate) {
+	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
 	}
 
