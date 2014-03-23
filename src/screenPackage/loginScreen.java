@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.HeadlessException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -21,8 +22,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 
+import databasePackage.CreateDBOperations;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class loginScreen extends JFrame implements ActionListener {
@@ -32,9 +37,14 @@ public class loginScreen extends JFrame implements ActionListener {
 	private JPasswordField passwordField;
 	private JButton login, forgotten;
 	private EmployeeRegister EList;
-
-	public loginScreen(EmployeeRegister U) {
-		EList = U;
+	private ResultSet s;
+	private ResultSet s2;
+	private CreateDBOperations a;
+	
+	public loginScreen(ResultSet s, ResultSet s2, CreateDBOperations a) {
+		this.s = s;
+		this.s2 = s2;
+		this.a = a;
 		setFrame(new JFrame());
 		getFrame().getContentPane().setBackground(Color.DARK_GRAY);
 		getFrame().setForeground(Color.RED);
@@ -123,16 +133,25 @@ public class loginScreen extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == login) {
-			if (emField.getText().equals("a")
-					&& passwordField.getText().equals("123")) {
-				getFrame().dispose();
-				HomeScreen h = new HomeScreen();
-			} else {
-				JOptionPane.showMessageDialog(null,
-						"Incorrect password or username! ",
-						"EmployeeRoster", JOptionPane.PLAIN_MESSAGE);
+			try {
+				s.first();
+				s2.first();
+				System.out.println(s.getString(1) + "\n" + s2.getString("Password"));
+				if (emField.getText().equals(s.getString(1))
+						&& passwordField.getText().equals(s2.getString("Password"))) {
+					getFrame().dispose();
+					HomeScreen h = new HomeScreen(s, a);
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Incorrect password or username! ",
+							"EmployeeRoster", JOptionPane.PLAIN_MESSAGE);
+				}
+			} catch (HeadlessException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
+
 	}
 
 	public JFrame getFrame() {

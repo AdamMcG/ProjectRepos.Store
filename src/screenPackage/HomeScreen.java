@@ -16,18 +16,25 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.sql.ResultSet;
 
 import javax.swing.JTextField;
 import javax.swing.JPanel;
+
+import databasePackage.CreateDBOperations;
 
 public class HomeScreen extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	JButton addButton, deleteButton, teamRoster, leaveApp, account,
-			updateEmployee, advancedSearch, deleteEmployee;
+			updateEmployee, advancedSearch, deleteEmployee, logout;
+	private ResultSet data;
+	private CreateDBOperations a;
 
-
-	public HomeScreen() {
+	public HomeScreen(ResultSet data, CreateDBOperations a) 
+	{
+		this.data = data;
+		this.a = a;
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBackground(Color.RED);
@@ -106,12 +113,13 @@ public class HomeScreen extends JFrame implements ActionListener {
 		deleteEmployee.setBackground(new Color(255, 153, 255));
 		deleteEmployee.setBounds(234, 329, 102, 30);
 		panel.add(deleteEmployee);
-		
-		JButton btnNewButton = new JButton("Logout");
-		btnNewButton.setBackground(new Color(255, 255, 204));
-		btnNewButton.setBounds(395, 43, 102, 23);
-		panel.add(btnNewButton);
 		deleteEmployee.addActionListener(this);
+
+		logout = new JButton("Logout");
+		logout.setBackground(new Color(255, 255, 204));
+		logout.setBounds(395, 43, 102, 23);
+		panel.add(logout);
+		logout.addActionListener(this);
 		frame.setVisible(true);
 	}
 
@@ -123,7 +131,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 		}
 
 		else if (ae.getSource() == account) {
-			AccountScreen accountScreen = new AccountScreen();
+			AccountScreen s = new AccountScreen(data, a);
 
 		}
 
@@ -156,6 +164,11 @@ public class HomeScreen extends JFrame implements ActionListener {
 					"Enter the name of contact you wish to delete. ",
 					"EmployeeRoster", JOptionPane.QUESTION_MESSAGE);
 	
+		}
+		
+		else if(ae.getSource() == logout)
+		{
+			System.exit(1);
 		}
 	}
 }

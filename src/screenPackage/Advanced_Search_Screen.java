@@ -119,7 +119,7 @@ public class Advanced_Search_Screen extends JFrame implements ActionListener {
 		if(ae.getSource()==cancel)
 		{
 			frame.dispose();
-			HomeScreen h = new HomeScreen();
+			HomeScreen h = new HomeScreen(null, null);
 		}
 	}
 }

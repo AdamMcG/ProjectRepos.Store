@@ -16,10 +16,10 @@ public class RunningTestClass {
 					EmployeeRegister E = new EmployeeRegister();
 					User a = new User("a", "123", "male", "Irish", 2.5,
 							"Admin", "123", "HR");
-					E.AddUser(a);
+					E.AddUserToRegistry(a);
 					System.out.println(a.getEmployeeNumber());
-					loginScreen window = new loginScreen(E);
-					window.getFrame().setVisible(true);
+					//loginScreen window = new loginScreen(E);
+					//window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

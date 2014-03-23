@@ -9,12 +9,18 @@ public class EmployeeRegister
 
 	public EmployeeRegister() {
 		EmployeeList = new ArrayList<User>();
-
+		groups = new ArrayList<User>();
 	}
 
-	public void AddUser(User u) {
+	public void AddUserToRegistry(User u) {
 		EmployeeList.add(u);
 
+	}
+	
+	public void AddUserToGroups(User u)
+	{
+		groups.add(u);
+		
 	}
 
 	public User getStaffMember(int n) {

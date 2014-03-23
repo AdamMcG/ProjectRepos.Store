@@ -213,7 +213,7 @@ public class AddScreen extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == cancel) {
 			frame.dispose();
-			HomeScreen h = new HomeScreen();
+			HomeScreen h = new HomeScreen(null, null);
 
 		}
 

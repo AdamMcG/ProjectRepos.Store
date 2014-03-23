@@ -8,7 +8,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,19 +24,20 @@ import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 
+import databasePackage.CreateDBOperations;
+
 public class AccountScreen extends JFrame implements ActionListener {
 
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField textName,textEmployeeNo,Textemptitle, textDept, textPhone;
 	private JButton security, contract, password;
-
+	private JRadioButton male, female;
+	private ResultSet s;
+	private CreateDBOperations d;
 	
-	public AccountScreen() {
-
+	public AccountScreen(ResultSet s, CreateDBOperations d) {
+		this.s = s;
+		this.d = d;
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setForeground(Color.RED);
@@ -49,11 +53,11 @@ public class AccountScreen extends JFrame implements ActionListener {
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(106, 65, 101, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		textName = new JTextField(30);
+		textName.setEditable(false);
+		textName.setBounds(106, 65, 101, 20);
+		panel.add(textName);
+		textName.setColumns(10);
 
 		JLabel lblEmployeeNo = new JLabel("Name:");
 		lblEmployeeNo.setForeground(Color.BLACK);
@@ -73,14 +77,19 @@ public class AccountScreen extends JFrame implements ActionListener {
 		lblNewLabel.setBounds(10, 11, 181, 32);
 		panel.add(lblNewLabel);
 
-		JRadioButton rdbtnMale = new JRadioButton("Male");
-		rdbtnMale.setBounds(116, 124, 54, 23);
-		panel.add(rdbtnMale);
-
-		JRadioButton rdbtnFemale = new JRadioButton("Female");
-		rdbtnFemale.setBounds(183, 124, 59, 23);
-		panel.add(rdbtnFemale);
-
+		male = new JRadioButton("Male");
+		male.setBounds(116, 124, 54, 23);
+		
+		female = new JRadioButton("Female");
+		female.setBounds(183, 124, 59, 23);
+		
+		ButtonGroup a = new ButtonGroup();
+		a.add(male);
+		a.add(female);
+		panel.add(male);
+		panel.add(female);
+		
+		
 		JLabel lblGender = new JLabel("Gender:");
 		lblGender.setForeground(Color.BLACK);
 		lblGender.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -99,23 +108,23 @@ public class AccountScreen extends JFrame implements ActionListener {
 		lblDepartment.setBounds(10, 208, 72, 23);
 		panel.add(lblDepartment);
 
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(106, 96, 102, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		textEmployeeNo = new JTextField(30);
+		textEmployeeNo.setEditable(false);
+		textEmployeeNo.setBounds(106, 96, 102, 20);
+		panel.add(textEmployeeNo);
+		textEmployeeNo.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setEditable(false);
-		textField_2.setBounds(106, 176, 190, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
+		Textemptitle = new JTextField(3);
+		Textemptitle.setEditable(false);
+		Textemptitle.setBounds(106, 176, 190, 20);
+		panel.add(Textemptitle);
+		Textemptitle.setColumns(10);
 
-		textField_3 = new JTextField();
-		textField_3.setEditable(false);
-		textField_3.setBounds(106, 207, 191, 20);
-		panel.add(textField_3);
-		textField_3.setColumns(10);
+		textDept = new JTextField(30);
+		textDept.setEditable(false);
+		textDept.setBounds(106, 207, 191, 20);
+		panel.add(textDept);
+		textDept.setColumns(10);
 
 		JLabel lblPhoneNo = new JLabel("Phone No.");
 		lblPhoneNo.setForeground(Color.BLACK);
@@ -123,15 +132,15 @@ public class AccountScreen extends JFrame implements ActionListener {
 		lblPhoneNo.setBounds(10, 242, 72, 38);
 		panel.add(lblPhoneNo);
 
-		textField_4 = new JTextField();
-		textField_4.setEditable(false);
-		textField_4.setBounds(106, 252, 190, 20);
-		panel.add(textField_4);
-		textField_4.setColumns(10);
+		textPhone = new JTextField(30);
+		textPhone.setEditable(false);
+		textPhone.setBounds(106, 252, 190, 20);
+		panel.add(textPhone);
+		textPhone.setColumns(10);
 
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(106, 299, 269, 121);
-		panel.add(textArea);
+		JTextArea textDescript = new JTextArea();
+		textDescript.setBounds(106, 299, 269, 121);
+		panel.add(textDescript);
 
 		JLabel lblDescription = new JLabel("Description:");
 		lblDescription.setForeground(Color.BLACK);
@@ -169,8 +178,42 @@ public class AccountScreen extends JFrame implements ActionListener {
 		mnHelp.setForeground(Color.BLACK);
 		menuBar.add(mnHelp);
 		frame.setVisible(true);
+		
+		try
+		{
+			s.first();
+			setFirst();
+		}
+		catch(SQLException e)
+		{
+			System.out.println("BOB");
+		}
 	}
 
+	public void setFirst()
+	{
+		try {
+			textName.setText((s.getString(6)+ s.getString(7)));
+			textEmployeeNo.setText(s.getString(1));
+			textPhone.setText("12");
+			textDept.setText(s.getString(2));
+			if(s.getString(8).equals("M"))
+			{
+				male.setSelected(true);
+			}
+			else
+			{
+				female.setSelected(true);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

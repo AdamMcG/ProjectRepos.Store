@@ -1,6 +1,5 @@
 package hardCodePackage;
 
-import java.util.Random;
 
 public class User {
 	private String name;
