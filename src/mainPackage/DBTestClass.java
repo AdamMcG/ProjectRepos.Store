@@ -1,5 +1,7 @@
 package mainPackage;
 
+import hardCodePackage.EmployeeRegister;
+
 import java.sql.*;
 
 import screenPackage.AccountScreen;
@@ -8,27 +10,29 @@ import databasePackage.CreateDBOperations;
 
 public class DBTestClass {
 
-	public static void main(String[] args)
-	{
-		CreateDBOperations a = new CreateDBOperations(); 
+	public static void main(String[] args) {
+		CreateDBOperations a = new CreateDBOperations();
 		a.openDB();
-		a.dropTables();
-		a.dropTableTeam();
-		a.dropTableContract();
-		a.dropTableEmp();
-		a.dropTablePassword();
-		a.buildtableDept();
+		 a.dropTables();
+		 a.dropTableTeam();
+		 a.dropTableContract();
+		 a.dropTableEmp();
+		 a.dropTablePassword();
+		a.buildtableDept(); // error here
 		a.buildTableContract();
 		a.buildTablePassword();
 		a.buildTableTeam();
 		a.buildEmployeeTable();
-		a.buildTableGenericLeave();
-		a.buildTableLeaveHoliday();
+		// a.buildTableGenericLeave();
+		// a.buildTableLeaveHoliday();
 		ResultSet data = a.queryDBemp();
 		ResultSet data2 = a.queryDBPass();
-		//a.queryDB();
-		loginScreen s = new loginScreen(data,data2,a);
+		// a.queryDB();
+		EmployeeRegister E = new EmployeeRegister(a);
+		E.printList();
+		loginScreen s = new loginScreen(data, data2, a);
 		s.getFrame().setVisible(true);
+		//a.CloseDB();
 	}
 
 }

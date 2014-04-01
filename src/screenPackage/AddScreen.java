@@ -25,9 +25,15 @@ import javax.swing.JRadioButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JTextArea;
 import javax.swing.JScrollBar;
+
+import databasePackage.CreateDBOperations;
 
 public class AddScreen extends JFrame implements ActionListener {
 
@@ -38,8 +44,15 @@ public class AddScreen extends JFrame implements ActionListener {
 	private JTextArea description;
 	private JRadioButton genderMale, genderFemale;
 	private EmployeeRegister EList;
+	private ResultSet data;
+	private CreateDBOperations a;
+	private String gender = "F";
+	private boolean male;
+	private JTextField PasswordField;
 
-	public AddScreen() {
+	public AddScreen(ResultSet data, CreateDBOperations a) {
+		this.data = data;
+		this.a = a;
 		JFrame frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setForeground(Color.RED);
@@ -82,13 +95,14 @@ public class AddScreen extends JFrame implements ActionListener {
 		genderMale = new JRadioButton("Male");
 		genderMale.setBounds(109, 175, 54, 23);
 		panel.add(genderMale);
-
+		genderMale.addActionListener(this);
 		genderFemale = new JRadioButton("Female");
 		genderFemale.setBounds(183, 175, 70, 23);
 		panel.add(genderFemale);
 		ButtonGroup b = new ButtonGroup();
 		b.add(genderMale);
 		b.add(genderFemale);
+
 		JLabel lblGender = new JLabel("Gender:");
 		lblGender.setForeground(Color.BLACK);
 		lblGender.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -127,11 +141,11 @@ public class AddScreen extends JFrame implements ActionListener {
 
 		add = new JButton("Add");
 		add.addActionListener(this);
-		add.setBounds(10, 548, 101, 33);
+		add.setBounds(10, 591, 101, 33);
 		panel.add(add);
 
 		cancel = new JButton("Cancel");
-		cancel.setBounds(191, 548, 120, 33);
+		cancel.setBounds(193, 591, 120, 33);
 		panel.add(cancel);
 		cancel.addActionListener(this);
 
@@ -170,6 +184,15 @@ public class AddScreen extends JFrame implements ActionListener {
 		description = new JTextArea();
 		description.setBounds(10, 125, 281, 71);
 		panel_1.add(description);
+
+		PasswordField = new JTextField();
+		PasswordField.setBounds(141, 513, 101, 20);
+		panel.add(PasswordField);
+		PasswordField.setColumns(10);
+
+		JLabel lblPassword_1 = new JLabel("Password");
+		lblPassword_1.setBounds(10, 516, 69, 17);
+		panel.add(lblPassword_1);
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -214,6 +237,25 @@ public class AddScreen extends JFrame implements ActionListener {
 		if (ae.getSource() == cancel) {
 			frame.dispose();
 			HomeScreen h = new HomeScreen(null, null);
+
+		}
+		if (ae.getSource() == genderMale) {
+			gender = "M";
+		} else if (ae.getSource() == add) {
+
+			try {
+				a.addEmp(gender, textName.getText(), textEmpTitle.getText(),
+						textContractLength.getText());
+				a.addPass(PasswordField.getText());
+				data = a.queryDBemp();
+				ResultSet data2 = a.queryDBPass();
+				data.first();
+				data2.first();
+				dispose();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 

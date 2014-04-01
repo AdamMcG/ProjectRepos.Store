@@ -1,5 +1,7 @@
 package databasePackage;
 
+import hardCodePackage.User;
+
 import java.sql.*;
 
 import oracle.jdbc.pool.OracleDataSource;
@@ -8,20 +10,22 @@ public class CreateDBOperations {
 	private Connection conn;
 	private ResultSet rset;
 	private PreparedStatement pstmt;
-
+	private int i = 1;
+	private int empcounter;
+	
 	public void openDB() {
 		try {
 			OracleDataSource ods = new OracleDataSource();
 
 			// home Database
-			 ods.setURL("jdbc:oracle:thin:proje/proje@localhost:1521/xe");
-			 ods.setUser("adam");
-			 ods.setPassword("luke1712");
+			// ods.setURL("jdbc:oracle:thin:proje/proje@localhost:1521/xe");
+			// ods.setUser("adam");
+			// ods.setPassword("luke1712");
 
 			// Tallaght Database
-			//ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
-			//ods.setUser("X00098814");
-			//ods.setPassword("db11Feb95");
+			ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
+			ods.setUser("X00098814");
+			ods.setPassword("db11Feb95");
 
 			conn = ods.getConnection();
 			System.out.println("Connection has been opened.");
@@ -38,27 +42,24 @@ public class CreateDBOperations {
 					+ "Contractid Varchar2(20) Not Null, "
 					+ "Passwordid Varchar2(20) Not Null, "
 					+ "Em_Fname	Varchar2(30),"
-					+ " Em_Lname  Varchar2(50),"
-					+ " Em_Gender CHAR,"
-					+ " Em_Nationality Varchar2(50),"
-					+ " Em_Contractlength Float,"
+					+ "Em_Lname  Varchar2(50),"
+					+ "Em_Gender CHAR,"
+					+ "Em_Nationality Varchar2(50),"
+					+ "Em_Contractlength Float,"
 					+ "Em_Holidays	 Integer,"
-					+ " Em_Sickdays INTEGER,"
-					+ " Em_Leavedays Integer, "
+					+ "Em_Sickdays INTEGER,"
+					+ "Em_Leavedays Integer, "
 					+ "Em_Address Varchar2(100),"
-					+ "Em_Isadmin	 Char,"
-					+ "FOREIGN KEY (DepartmentID) REFERENCES Department (DepartmentID),"
-					+ "	FOREIGN KEY (TeamID) REFERENCES Team (TeamID))";
+					+ "Em_Isadmin Char, Em_Manager Char)";
 
 			pstmt = conn.prepareStatement(s);
 
 			// Create the table.
 			pstmt.executeUpdate();
 
-			String s2 = "INSERT INTO Employee VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			String s2 = "INSERT INTO Employee VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(s2);
 
-			// Row1
 			pstmt.setString(1, "E123456789");
 			pstmt.setString(2, "D123456789");
 			pstmt.setString(3, "T123456789");
@@ -74,6 +75,26 @@ public class CreateDBOperations {
 			pstmt.setString(13, "12");
 			pstmt.setString(14, "123 Fake st.");
 			pstmt.setString(15, "1");
+			pstmt.setString(16, "1");
+
+			pstmt.executeUpdate();
+
+			pstmt.setString(1, "E123456788");
+			pstmt.setString(2, "D123456789");
+			pstmt.setString(3, "T123456789");
+			pstmt.setString(4, "C123456789");
+			pstmt.setString(5, "P123456789");
+			pstmt.setString(6, "TestFNmae");
+			pstmt.setString(7, "TestLName");
+			pstmt.setString(8, "M");
+			pstmt.setString(9, "Ireland");
+			pstmt.setString(10, "0.0");
+			pstmt.setString(11, "12");
+			pstmt.setString(12, "12");
+			pstmt.setString(13, "12");
+			pstmt.setString(14, "123 Fake st.");
+			pstmt.setString(15, "1");
+			pstmt.setString(16, "1");
 
 			pstmt.executeUpdate();
 
@@ -91,7 +112,7 @@ public class CreateDBOperations {
 			pstmt = conn.prepareStatement(s);
 
 			// Create the table.
-			pstmt.executeUpdate();
+			pstmt.executeUpdate();// error here
 
 			String s2 = "INSERT INTO Department VALUES(?,?)";
 			pstmt = conn.prepareStatement(s2);
@@ -121,8 +142,6 @@ public class CreateDBOperations {
 			String s2 = "INSERT INTO Team VALUES (?,?,?,?)";
 			pstmt = conn.prepareStatement(s2);
 
-			// Row1 'T123456789', 'TestTeam', 'Test Team Description',
-			// 'E123456789'
 			pstmt.setString(1, "T123456789");
 			pstmt.setString(2, "TestTeam");
 			pstmt.setString(3, "Test team description");
@@ -238,12 +257,19 @@ public class CreateDBOperations {
 			pstmt.setString(4, "SecretA");
 
 			pstmt.executeUpdate();
+
+			pstmt.setString(1, "P123456788");
+			pstmt.setString(2, "Admin3");
+			pstmt.setString(3, "SecretQ");
+			pstmt.setString(4, "SecretA");
+
+			pstmt.executeUpdate();
 			System.out.println("Password table created");
 		} catch (SQLException e) {
 
 		}
 	}
-	
+
 	public void dropTables() {
 		System.out.println("Checking for existing tables.");
 
@@ -273,7 +299,6 @@ public class CreateDBOperations {
 
 			try {
 				pstmt.execute();
-				// Drop the Movie table.
 
 			} catch (SQLException ex) {
 				// No need to report an error.
@@ -357,7 +382,6 @@ public class CreateDBOperations {
 		}
 	}
 
-	
 	public ResultSet queryDBPass() {
 		String sqlStatement = "SELECT * FROM Password";
 		try {
@@ -380,8 +404,6 @@ public class CreateDBOperations {
 		return rset;
 	}
 
-	
-	
 	public ResultSet queryDB() {
 		String sqlStatement = "SELECT * FROM Department";
 		try {
@@ -407,28 +429,25 @@ public class CreateDBOperations {
 		try {
 			pstmt = conn.prepareStatement(sqlStatement,
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
+					ResultSet.CONCUR_UPDATABLE);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				System.out.printf("%20s %20s %20s \n %20s %20s %20s \n %20s %20s %20s \n"
-						+ "%20f %20d %20d \n"
-						+ "%20d %20s %20s \n \n",
+				System.out.printf(
+						"%20s %20s %20s \n %20s %20s %20s \n %20s %20s %20s \n"
+								+ "%20f %20d %20d \n" + "%20d %20s %20s \n \n",
 						rset.getString("EmployeeID"),
 						rset.getString("DepartmentID"),
-						rset.getString("TeamID"),
-						rset.getString("ContractID"),
+						rset.getString("TeamID"), rset.getString("ContractID"),
 						rset.getString("PasswordID"),
-						rset.getString("Em_Fname"),
-						rset.getString("Em_Lname"),
+						rset.getString("Em_Fname"), rset.getString("Em_Lname"),
 						rset.getString("Em_Gender"),
 						rset.getString("Em_Nationality"),
 						rset.getDouble("Em_Contractlength"),
-						rset.getInt("Em_Holidays"),
-						rset.getInt("Em_Sickdays"),
+						rset.getInt("Em_Holidays"), rset.getInt("Em_Sickdays"),
 						rset.getInt("Em_Leavedays"),
 						rset.getString("Em_Address"),
 						rset.getString("Em_Isadmin"));
-						
+
 			}
 		} catch (Exception ex) {
 			System.out.println("ERROR: " + ex.getMessage());
@@ -436,5 +455,85 @@ public class CreateDBOperations {
 
 		return rset;
 	}
+
+	public void addEmp(String gender, String name, String title,
+			String contractLength) {
+		try {
+			String m = "n";
+			String a = "n";
+			String queryString = "insert into Employee(EmployeeID, "
+					+ "DepartmentID," + "Teamid," + "Contractid,"
+					+ "Passwordid , " + "Em_Fname," + "Em_Lname,"
+					+ "Em_Gender," + "Em_Nationality," + "Em_Contractlength,"
+					+ "Em_Holidays," + "Em_Sickdays," + "Em_Leavedays, "
+					+ "Em_Address," + "Em_Isadmin, "
+					+ "Em_Manager) values(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			pstmt = conn.prepareStatement(queryString);
+
+			if (title.equals("Manager")) {
+				m = "Y";
+				a = "N";
+				empcounter = 15000;
+			} else if (title.equals("Admin")) {
+				m = "N";
+				a = "Y";
+				empcounter = 13000;
+			}
+			else
+			{
+				empcounter = 10000;
+			}
+			i++;
+			empcounter = i + empcounter;
+			String e = "E" + empcounter;
+			pstmt.setString(1, e);
+			pstmt.setString(2, "D123456789");
+			pstmt.setString(3, "T123456789");
+			pstmt.setString(4, "C123456789");
+			pstmt.setString(5, "P123456789");
+			pstmt.setString(6, name);
+			pstmt.setString(7, name);
+			pstmt.setString(8, gender);
+			pstmt.setString(9, "Ireland");
+			pstmt.setString(10, contractLength);
+			pstmt.setString(11, "12");
+			pstmt.setString(12, "12");
+			pstmt.setString(13, "12");
+			pstmt.setString(14, "123 Fake st.");
+			pstmt.setString(15, m);
+			pstmt.setString(16, a);
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+
+	public void addPass(String pass) {
+		String s2 = "INSERT INTO Password VALUES (?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(s2);
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		// 'P123456789', 'Admin', 'SecretQ', 'SecretA'
+		// Row1
+		try {
+			String number = "P" + i;
+			pstmt.setString(1, number);
+			pstmt.setString(2, pass);
+			pstmt.setString(3, "SecretQ");
+			pstmt.setString(4, "SecretA");
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+	}
 	
+
+
 }

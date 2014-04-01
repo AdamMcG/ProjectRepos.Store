@@ -36,6 +36,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 		this.data = data;
 		this.a = a;
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBackground(Color.RED);
 		frame.setForeground(Color.ORANGE);
@@ -127,7 +128,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == addButton) {
 			// new AddScreen();
-			AddScreen addScreen = new AddScreen();
+			AddScreen add = new AddScreen(data, a);
 		}
 
 		else if (ae.getSource() == account) {

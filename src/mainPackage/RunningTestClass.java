@@ -13,11 +13,8 @@ public class RunningTestClass {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EmployeeRegister E = new EmployeeRegister();
-					User a = new User("a", "123", "male", "Irish", 2.5,
-							"Admin", "123", "HR");
-					E.AddUserToRegistry(a);
-					System.out.println(a.getEmployeeNumber());
+					
+					
 					//loginScreen window = new loginScreen(E);
 					//window.getFrame().setVisible(true);
 				} catch (Exception e) {

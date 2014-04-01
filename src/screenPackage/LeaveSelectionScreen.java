@@ -22,7 +22,7 @@ import javax.swing.JMenu;
 public class LeaveSelectionScreen extends JFrame implements ActionListener{
 	private JFrame frame;
 	private JButton continue1, cancel;
-
+	
 
 	/**
 	 * Create the application.

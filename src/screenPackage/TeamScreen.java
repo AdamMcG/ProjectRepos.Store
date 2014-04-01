@@ -198,7 +198,6 @@ public class TeamScreen extends JFrame implements ActionListener {
 	{
 		if(ae.getSource() == cancel)
 		{
-			HomeScreen s = new HomeScreen();
 			frame.dispose();
 			
 		}

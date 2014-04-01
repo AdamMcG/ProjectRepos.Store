@@ -40,12 +40,13 @@ public class loginScreen extends JFrame implements ActionListener {
 	private ResultSet s;
 	private ResultSet s2;
 	private CreateDBOperations a;
-	
+
 	public loginScreen(ResultSet s, ResultSet s2, CreateDBOperations a) {
 		this.s = s;
 		this.s2 = s2;
 		this.a = a;
 		setFrame(new JFrame());
+		frame.setResizable(false);
 		getFrame().getContentPane().setBackground(Color.DARK_GRAY);
 		getFrame().setForeground(Color.RED);
 		getFrame().getContentPane().setForeground(Color.GREEN);
@@ -132,26 +133,35 @@ public class loginScreen extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		if (e.getSource() == login) {
-			try {
-				s.first();
-				s2.first();
-				System.out.println(s.getString(1) + "\n" + s2.getString("Password"));
-				if (emField.getText().equals(s.getString(1))
-						&& passwordField.getText().equals(s2.getString("Password"))) {
-					getFrame().dispose();
-					HomeScreen h = new HomeScreen(s, a);
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"Incorrect password or username! ",
-							"EmployeeRoster", JOptionPane.PLAIN_MESSAGE);
-				}
-			} catch (HeadlessException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			loginCheck();
+
 		}
 
+	}
+
+	public void loginCheck() {
+		try {
+			s.first();
+			s2.first();
+			System.out.println(s.getString("EmployeeID") + "\n" + s2.getString("Password"));
+
+			if ((emField.getText().equals(s.getString("EmployeeID")))
+					&& (passwordField.getText().equals(s2.getString("Password")))) {
+				getFrame().dispose();
+				HomeScreen h = new HomeScreen(s, a);
+			} else {
+				s.next();
+				s2.next();
+				JOptionPane.showMessageDialog(null,
+						"Incorrect password or username! ", "EmployeeRoster",
+						JOptionPane.PLAIN_MESSAGE);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public JFrame getFrame() {

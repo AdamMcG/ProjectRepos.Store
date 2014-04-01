@@ -80,6 +80,7 @@ public class AccountScreen extends JFrame implements ActionListener {
 		male = new JRadioButton("Male");
 		male.setBounds(116, 124, 54, 23);
 		
+		
 		female = new JRadioButton("Female");
 		female.setBounds(183, 124, 59, 23);
 		
