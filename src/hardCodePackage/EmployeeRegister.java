@@ -29,7 +29,7 @@ public class EmployeeRegister {
 	public void removeEmployee() {
 
 	}
-	
+
 	public int findEmployee(String name) {
 		int index = -1;
 		for (int i = 0; i < EmployeeList.size(); i++) {
@@ -41,11 +41,11 @@ public class EmployeeRegister {
 	}
 
 	public void fillRegister() {
-	
+
 		rset = cDBo.queryDBemp();
 		ResultSet rsetPass = cDBo.queryDBPass();
 		ResultSet rsetDep = cDBo.queryDB();
-		String staff = "regular employee";
+
 		try {
 			rset.first();
 			rsetPass.first();
@@ -54,17 +54,6 @@ public class EmployeeRegister {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-	
-		try {
-			if (rset.getString("Em_IsAdmin").equals("Y")) {
-				staff = "Admin";
-			} else if (rset.getString("Em_Manager").equals("Y")) {
-				staff = "Manager";
-			}
-		} catch (SQLException e1) {
-			
-			e1.printStackTrace();
-		}
 
 		if (EmployeeList.size() > 0) {
 			for (int i = EmployeeList.size() - 1; i >= 0; i--) {
@@ -72,35 +61,67 @@ public class EmployeeRegister {
 			}
 		}
 		try {
-			while (rset.next()) {
+			rset.beforeFirst();
+			while (rset.next() == true) {
 				String name = (rset.getString(6) + rset.getString(7));
 				User u = new User(name, rset.getString(8), rset.getString(9),
-						rset.getDouble(10), staff,
+						rset.getString(1), rset.getDouble(10), setStaff(rset),
 						rsetPass.getString("password"),
 						rsetDep.getString("Dep_name"));
 				EmployeeList.add(u);
 			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
 		}
 	}
 
-	public void removeTeamMember() 
-	{
-		
+	public String returnEmployeeType(int i) {
+		return EmployeeList.get(i).getEmployeeType();
+	}
+
+	public void removeTeamMember() {
 
 	}
 
-	public void printList() 
-	{
-		for (int i = 0; i < EmployeeList.size(); i++)
-		{
+	public void printList() {
+		for (int i = 0; i < EmployeeList.size(); i++) {
 			System.out.println(EmployeeList.get(i).getEmployeeNumber()
-					+ EmployeeList.get(i).getGender());
-			
+					+ EmployeeList.get(i).getGender()
+					+ EmployeeList.get(i).getEmployeeType());
+
 		}
-		
 	}
 
+	public String setStaff(ResultSet rset) {
+		String staff = "regular employee";
+		try {
+			if (rset.getString("Em_IsAdmin").equals("Y")) {
+				staff = "Admin";
+			} else if (rset.getString("Em_Manager").equals("Y")
+					&& (rset.getString("Em_IsAdmin").equals("N"))) {
+				staff = "Manager";
+			} else {
+				staff = "staff";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return staff;
+	}
+
+	public String getEmployeeNum(int i) {
+		String s = EmployeeList.get(i).getEmployeeNumber();
+		return s;
+	}
+
+	public String getEmployeePass(int i) {
+		String s = EmployeeList.get(i).getPassword();
+		return s;
+	}
+
+	public int EmployeeListSize() {
+		return EmployeeList.size();
+	}
 }

@@ -3,25 +3,9 @@ package screenPackage;
 import hardCodePackage.EmployeeRegister;
 import hardCodePackage.User;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JPopupMenu;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,9 +13,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.swing.JTextArea;
-import javax.swing.JScrollBar;
 
 import databasePackage.CreateDBOperations;
 
@@ -44,15 +25,21 @@ public class AddScreen extends JFrame implements ActionListener {
 	private JTextArea description;
 	private JRadioButton genderMale, genderFemale;
 	private EmployeeRegister EList;
-	private ResultSet data;
-	private CreateDBOperations a;
+	 private CreateDBOperations ad;
+	 private ResultSet data;
 	private String gender = "F";
 	private boolean male;
 	private JTextField PasswordField;
-
-	public AddScreen(ResultSet data, CreateDBOperations a) {
+	private String a;
+	private String m;
+	private int i;
+	private JTextField textField;
+	User user;
+	
+	
+	public AddScreen(ResultSet data, CreateDBOperations ad) {
 		this.data = data;
-		this.a = a;
+		this.ad = ad;
 		JFrame frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setForeground(Color.RED);
@@ -70,7 +57,7 @@ public class AddScreen extends JFrame implements ActionListener {
 
 		textName = new JTextField();
 		textName.setBackground(Color.WHITE);
-		textName.setBounds(106, 105, 101, 20);
+		textName.setBounds(106, 79, 101, 20);
 		panel.add(textName);
 		textName.setColumns(10);
 
@@ -78,7 +65,7 @@ public class AddScreen extends JFrame implements ActionListener {
 		lblEmployeeNo.setForeground(Color.BLACK);
 		lblEmployeeNo.setBackground(Color.WHITE);
 		lblEmployeeNo.setFont(new Font("Arial", Font.PLAIN, 13));
-		lblEmployeeNo.setBounds(10, 104, 86, 20);
+		lblEmployeeNo.setBounds(10, 78, 86, 20);
 		panel.add(lblEmployeeNo);
 
 		JLabel lblPassword = new JLabel("Emp.No:");
@@ -193,6 +180,15 @@ public class AddScreen extends JFrame implements ActionListener {
 		JLabel lblPassword_1 = new JLabel("Password");
 		lblPassword_1.setBounds(10, 516, 69, 17);
 		panel.add(lblPassword_1);
+		
+		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setBounds(10, 106, 46, 30);
+		panel.add(lblAddress);
+		
+		textField = new JTextField();
+		textField.setBounds(106, 102, 101, 20);
+		panel.add(textField);
+		textField.setColumns(10);
 
 		JMenuBar menuBar = new JMenuBar();
 		frame.setJMenuBar(menuBar);
@@ -212,52 +208,68 @@ public class AddScreen extends JFrame implements ActionListener {
 		frame.setVisible(true);
 	}
 
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+	public String empNumber() {
+		int empcounter;
+		if (textEmpTitle.equals("Manager")) {
+			m = "Y";
+			a = "N";
+			empcounter = 15000;
+		} else if (textEmpTitle.equals("Admin")) {
+			m = "N";
+			a = "Y";
+			empcounter = 13000;
+		} else {
+			empcounter = 10000;
+		}
+		i++;
+		empcounter = empcounter + i;
+		String empNumber = "E" + empcounter;
+		return empNumber;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		if (ae.getSource() == cancel) {
 			frame.dispose();
-			HomeScreen h = new HomeScreen(null, null);
+			HomeScreen h = new HomeScreen(EList, 0, ad, data);
 
 		}
 		if (ae.getSource() == genderMale) {
 			gender = "M";
 		} else if (ae.getSource() == add) {
+			addNewUser();
+		}
+	}		
+			public void addNewUser()
+			{
+				try{
+					String name = textName.getText();
+					String title = textEmpTitle.getText();
+					String pass = PasswordField.getText();
+					String dept = textDepartment.getText();
+				double contract = Double.parseDouble(textContractLength
+						.getText());
+				String contractL = ("" +contract);
 
-			try {
-				a.addEmp(gender, textName.getText(), textEmpTitle.getText(),
-						textContractLength.getText());
-				a.addPass(PasswordField.getText());
-				data = a.queryDBemp();
-				ResultSet data2 = a.queryDBPass();
+				user = new User(name, gender, "Ireland",
+						empNumber(), contract, title,
+						pass, dept);
+				System.out.println(user.getName());
+				
+				
+				ad.addEmp(user);
+				ad.addPass(user);
+				data = ad.queryDBemp();
+				ResultSet data2 = ad.queryDBPass();
 				data.first();
 				data2.first();
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
 				dispose();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-
-		}
+			
 
 	}
-}

@@ -30,7 +30,7 @@ public class DBTestClass {
 		// a.queryDB();
 		EmployeeRegister E = new EmployeeRegister(a);
 		E.printList();
-		loginScreen s = new loginScreen(data, data2, a);
+		loginScreen s = new loginScreen(E, a, data, data2);
 		s.getFrame().setVisible(true);
 		//a.CloseDB();
 	}

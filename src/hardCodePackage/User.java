@@ -3,7 +3,7 @@ package hardCodePackage;
 
 public class User {
 	private String name;
-	private int employeeNumber = 123456789;
+	private String employeeNumber;
 	private String birthdate;
 	private String gender;
 	private String nationality;
@@ -11,10 +11,12 @@ public class User {
 	private double contractLength;
 	private String department,password;
 
-	public User(String name, String gender, String nationality, 
+	public User(String name, String gender, String nationality, String employeeNumber,
 			double contractLength, String employeeType, String password,
 			String department) {
 		this.setName(name);
+		this.setEmployeeNumber(employeeNumber);
+		this.employeeType = employeeType;
 		this.setGender(gender);
 		this.setNationality(nationality);
 		this.setContractLength(contractLength);
@@ -23,28 +25,16 @@ public class User {
 	}
 
 	public String getEmployeeNumber() {
-		String empNum = "E" + String.valueOf(this.employeeNumber);
-		return empNum;
-	}
-
-	public void setEmployeeNumber(int employeeNumber) {
-		int temp = 1;
-		if (getEmployeeType().equals("manager")) {
-			this.employeeNumber = 150000 + temp;
-		} else if (getEmployeeType().equals("Admin")) {
-
-			this.employeeNumber = 180000 + temp;
-		}
-
-		else {
-			this.employeeNumber = 120000 + temp;
-
-		}
-		temp++;
+	return employeeNumber;
 	}
 
 	public String getEmployeeType() {
 		return employeeType;
+	}
+	
+	public void setEmployeeNumber(String employeeNumber)
+	{
+		this.employeeNumber = employeeNumber;
 	}
 
 	public void setEmployeeType(String employeeType) {

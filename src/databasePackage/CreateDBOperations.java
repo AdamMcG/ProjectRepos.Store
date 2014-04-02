@@ -10,22 +10,22 @@ public class CreateDBOperations {
 	private Connection conn;
 	private ResultSet rset;
 	private PreparedStatement pstmt;
-	private int i = 1;
-	private int empcounter;
-	
+	int i2 = 123456790;
+	int i = 2;
+	int empcounter;
 	public void openDB() {
 		try {
 			OracleDataSource ods = new OracleDataSource();
 
 			// home Database
-			// ods.setURL("jdbc:oracle:thin:proje/proje@localhost:1521/xe");
-			// ods.setUser("adam");
-			// ods.setPassword("luke1712");
+			 ods.setURL("jdbc:oracle:thin:proje/proje@localhost:1521/xe");
+			 ods.setUser("adam");
+			 ods.setPassword("luke1712");
 
 			// Tallaght Database
-			ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
-			ods.setUser("X00098814");
-			ods.setPassword("db11Feb95");
+			//ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
+		//ods.setUser("X00098814");
+			//ods.setPassword("db11Feb95");
 
 			conn = ods.getConnection();
 			System.out.println("Connection has been opened.");
@@ -60,7 +60,7 @@ public class CreateDBOperations {
 			String s2 = "INSERT INTO Employee VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(s2);
 
-			pstmt.setString(1, "E123456789");
+			pstmt.setString(1, "E15001");
 			pstmt.setString(2, "D123456789");
 			pstmt.setString(3, "T123456789");
 			pstmt.setString(4, "C123456789");
@@ -74,27 +74,27 @@ public class CreateDBOperations {
 			pstmt.setString(12, "12");
 			pstmt.setString(13, "12");
 			pstmt.setString(14, "123 Fake st.");
-			pstmt.setString(15, "1");
-			pstmt.setString(16, "1");
+			pstmt.setString(15, "Y");
+			pstmt.setString(16, "N");
 
 			pstmt.executeUpdate();
 
-			pstmt.setString(1, "E123456788");
+			pstmt.setString(1, "E15002");
 			pstmt.setString(2, "D123456789");
 			pstmt.setString(3, "T123456789");
 			pstmt.setString(4, "C123456789");
 			pstmt.setString(5, "P123456789");
 			pstmt.setString(6, "TestFNmae");
 			pstmt.setString(7, "TestLName");
-			pstmt.setString(8, "M");
+			pstmt.setString(8, "F");
 			pstmt.setString(9, "Ireland");
 			pstmt.setString(10, "0.0");
 			pstmt.setString(11, "12");
 			pstmt.setString(12, "12");
 			pstmt.setString(13, "12");
 			pstmt.setString(14, "123 Fake st.");
-			pstmt.setString(15, "1");
-			pstmt.setString(16, "1");
+			pstmt.setString(15, "N");
+			pstmt.setString(16, "Y");
 
 			pstmt.executeUpdate();
 
@@ -456,8 +456,39 @@ public class CreateDBOperations {
 		return rset;
 	}
 
-	public void addEmp(String gender, String name, String title,
-			String contractLength) {
+	
+	
+	
+	
+	
+	
+	public void addPass(User u) {
+	
+	String s2 = "INSERT INTO Password VALUES (?,?,?,?)";
+	try {
+		pstmt = conn.prepareStatement(s2);
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+	}
+	// 'P123456789', 'Admin', 'SecretQ', 'SecretA'
+	// Row1
+	try {
+		String number = "P" + i2;
+		i2++;
+		pstmt.setString(1, number);
+		pstmt.setString(2, u.getPassword());
+		pstmt.setString(3, "SecretQ");
+		pstmt.setString(4, "SecretA");
+		pstmt.executeUpdate();
+	} catch (SQLException e) {
+
+		e.printStackTrace();
+	}
+}
+public void addEmp(User u)
+{
+	
 		try {
 			String m = "n";
 			String a = "n";
@@ -469,33 +500,18 @@ public class CreateDBOperations {
 					+ "Em_Address," + "Em_Isadmin, "
 					+ "Em_Manager) values(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(queryString);
-
-			if (title.equals("Manager")) {
-				m = "Y";
-				a = "N";
-				empcounter = 15000;
-			} else if (title.equals("Admin")) {
-				m = "N";
-				a = "Y";
-				empcounter = 13000;
-			}
-			else
-			{
-				empcounter = 10000;
-			}
-			i++;
-			empcounter = i + empcounter;
-			String e = "E" + empcounter;
-			pstmt.setString(1, e);
+			String contactLength = " " +(u.getContractLength());
+			
+			pstmt.setString(1, u.getEmployeeNumber());
 			pstmt.setString(2, "D123456789");
 			pstmt.setString(3, "T123456789");
 			pstmt.setString(4, "C123456789");
 			pstmt.setString(5, "P123456789");
-			pstmt.setString(6, name);
-			pstmt.setString(7, name);
-			pstmt.setString(8, gender);
+			pstmt.setString(6, u.getName());
+			pstmt.setString(7, u.getName());
+			pstmt.setString(8, u.getGender());
 			pstmt.setString(9, "Ireland");
-			pstmt.setString(10, contractLength);
+			pstmt.setString(10, contactLength);
 			pstmt.setString(11, "12");
 			pstmt.setString(12, "12");
 			pstmt.setString(13, "12");
@@ -509,31 +525,6 @@ public class CreateDBOperations {
 			System.exit(1);
 		}
 	}
-
-	public void addPass(String pass) {
-		String s2 = "INSERT INTO Password VALUES (?,?,?,?)";
-		try {
-			pstmt = conn.prepareStatement(s2);
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		// 'P123456789', 'Admin', 'SecretQ', 'SecretA'
-		// Row1
-		try {
-			String number = "P" + i;
-			pstmt.setString(1, number);
-			pstmt.setString(2, pass);
-			pstmt.setString(3, "SecretQ");
-			pstmt.setString(4, "SecretA");
-			pstmt.executeUpdate();
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-
-	}
 	
-
 
 }

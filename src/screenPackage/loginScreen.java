@@ -35,16 +35,17 @@ public class loginScreen extends JFrame implements ActionListener {
 	private JFrame frame;
 	private JTextField emField;
 	private JPasswordField passwordField;
-	private JButton login, forgotten;
+	private JButton login, forgotten,cancel;
 	private EmployeeRegister EList;
 	private ResultSet s;
 	private ResultSet s2;
 	private CreateDBOperations a;
 
-	public loginScreen(ResultSet s, ResultSet s2, CreateDBOperations a) {
+	public loginScreen(EmployeeRegister EList, CreateDBOperations a, ResultSet s, ResultSet s2) {
+		this.a = a;
 		this.s = s;
 		this.s2 = s2;
-		this.a = a;
+		this.EList = EList;
 		setFrame(new JFrame());
 		frame.setResizable(false);
 		getFrame().getContentPane().setBackground(Color.DARK_GRAY);
@@ -101,14 +102,16 @@ public class loginScreen extends JFrame implements ActionListener {
 		forgotten = new JButton("Forgot Password?");
 		forgotten.setBackground(new Color(102, 255, 255));
 		forgotten.setForeground(Color.BLACK);
-		forgotten.setBounds(68, 262, 119, 32);
+		forgotten.setBounds(68, 262, 148, 32);
 		panel.add(forgotten);
+		forgotten.addActionListener(this);
 
-		JButton btnCancel = new JButton("cancel");
-		btnCancel.setBackground(new Color(255, 255, 204));
-		btnCancel.setForeground(Color.BLACK);
-		btnCancel.setBounds(149, 201, 89, 23);
-		panel.add(btnCancel);
+		cancel = new JButton("cancel");
+		cancel.setBackground(new Color(255, 255, 204));
+		cancel.setForeground(Color.BLACK);
+		cancel.setBounds(149, 201, 89, 23);
+		panel.add(cancel);
+		cancel.addActionListener(this);
 	}
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -138,28 +141,35 @@ public class loginScreen extends JFrame implements ActionListener {
 			loginCheck();
 
 		}
-
+		
+		else if(e.getSource() == cancel)
+		{
+			System.exit(1);
+		}
+		
+		else if(e.getSource() == forgotten)
+		{
+			ForgottenPasswordScreen1 s = new ForgottenPasswordScreen1();
+		}
 	}
 
 	public void loginCheck() {
 		try {
-			s.first();
-			s2.first();
-			System.out.println(s.getString("EmployeeID") + "\n" + s2.getString("Password"));
+			System.out.println(EList.getEmployeeNum(0) + "\n" + EList.getEmployeePass(0));
 
-			if ((emField.getText().equals(s.getString("EmployeeID")))
-					&& (passwordField.getText().equals(s2.getString("Password")))) {
+			for(int i = 0; i < EList.EmployeeListSize(); i++)
+			{
+			if ((emField.getText().equals(EList.getEmployeeNum(i)))
+					&& (passwordField.getText().equals(EList.getEmployeePass(i)))) {
 				getFrame().dispose();
-				HomeScreen h = new HomeScreen(s, a);
+				HomeScreen h = new HomeScreen(EList, i, a, s);
 			} else {
-				s.next();
-				s2.next();
 				JOptionPane.showMessageDialog(null,
 						"Incorrect password or username! ", "EmployeeRoster",
 						JOptionPane.PLAIN_MESSAGE);
 			}
-
-		} catch (SQLException e) {
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

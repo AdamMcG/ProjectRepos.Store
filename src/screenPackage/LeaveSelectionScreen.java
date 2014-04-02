@@ -100,7 +100,7 @@ public class LeaveSelectionScreen extends JFrame implements ActionListener{
 		}
 		else if(ae.getSource() == cancel)
 		{
-			HomeScreen s = new HomeScreen();
+			HomeScreen s = new HomeScreen(null, null);
 			frame.setVisible(false);
 			
 		}

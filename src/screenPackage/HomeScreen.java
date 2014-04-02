@@ -1,5 +1,7 @@
 package screenPackage;
 
+import hardCodePackage.EmployeeRegister;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -30,11 +32,13 @@ public class HomeScreen extends JFrame implements ActionListener {
 			updateEmployee, advancedSearch, deleteEmployee, logout;
 	private ResultSet data;
 	private CreateDBOperations a;
+	private EmployeeRegister e;
 
-	public HomeScreen(ResultSet data, CreateDBOperations a) 
+	public HomeScreen(EmployeeRegister e, int i, CreateDBOperations a, ResultSet data) 
 	{
-		this.data = data;
 		this.a = a;
+		this.data = data;
+		this.e = e;
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
@@ -71,6 +75,7 @@ public class HomeScreen extends JFrame implements ActionListener {
 		addButton.setBackground(new Color(255, 153, 255));
 		addButton.setBounds(10, 329, 102, 30);
 		panel.add(addButton);
+		addButton.setEnabled(false);
 		addButton.addActionListener(this);
 
 		leaveApp = new JButton("Apply for Leave");
@@ -109,13 +114,21 @@ public class HomeScreen extends JFrame implements ActionListener {
 		updateEmployee.setBounds(122, 329, 102, 30);
 		panel.add(updateEmployee);
 		updateEmployee.addActionListener(this);
-
+		
 		deleteEmployee = new JButton("Delete Employee");
 		deleteEmployee.setBackground(new Color(255, 153, 255));
 		deleteEmployee.setBounds(234, 329, 102, 30);
 		panel.add(deleteEmployee);
+		deleteEmployee.setEnabled(false);
 		deleteEmployee.addActionListener(this);
-
+		
+		if(e.returnEmployeeType(i) =="Admin")
+		{
+			updateEmployee.setEnabled(true);
+			deleteEmployee.setEnabled(true);
+			addButton.setEnabled(true);
+		}
+			
 		logout = new JButton("Logout");
 		logout.setBackground(new Color(255, 255, 204));
 		logout.setBounds(395, 43, 102, 23);
