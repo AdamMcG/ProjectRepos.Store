@@ -35,13 +35,14 @@ public class loginScreen extends JFrame implements ActionListener {
 	private JFrame frame;
 	private JTextField emField;
 	private JPasswordField passwordField;
-	private JButton login, forgotten,cancel;
+	private JButton login, forgotten, cancel;
 	private EmployeeRegister EList;
 	private ResultSet s;
 	private ResultSet s2;
 	private CreateDBOperations a;
 
-	public loginScreen(EmployeeRegister EList, CreateDBOperations a, ResultSet s, ResultSet s2) {
+	public loginScreen(EmployeeRegister EList, CreateDBOperations a,
+			ResultSet s, ResultSet s2) {
 		this.a = a;
 		this.s = s;
 		this.s2 = s2;
@@ -141,33 +142,33 @@ public class loginScreen extends JFrame implements ActionListener {
 			loginCheck();
 
 		}
-		
-		else if(e.getSource() == cancel)
-		{
+
+		else if (e.getSource() == cancel) {
 			System.exit(1);
 		}
-		
-		else if(e.getSource() == forgotten)
-		{
+
+		else if (e.getSource() == forgotten) {
 			ForgottenPasswordScreen1 s = new ForgottenPasswordScreen1();
 		}
 	}
 
 	public void loginCheck() {
 		try {
-			System.out.println(EList.getEmployeeNum(0) + "\n" + EList.getEmployeePass(0));
+			System.out.println(EList.getEmployeeNum(0) + "\n"
+					+ EList.getEmployeePass(0));
 
-			for(int i = 0; i < EList.EmployeeListSize(); i++)
-			{
-			if ((emField.getText().equals(EList.getEmployeeNum(i)))
-					&& (passwordField.getText().equals(EList.getEmployeePass(i)))) {
-				getFrame().dispose();
-				HomeScreen h = new HomeScreen(EList, i, a, s);
-			} else {
-				JOptionPane.showMessageDialog(null,
-						"Incorrect password or username! ", "EmployeeRoster",
-						JOptionPane.PLAIN_MESSAGE);
-			}
+			for (int i = 0; i < EList.EmployeeListSize(); i++) {
+				if ((emField.getText().equals(EList.getEmployeeNum(i)))
+						&& (passwordField.getText().equals(EList
+								.getEmployeePass(i)))) {
+					getFrame().dispose();
+					HomeScreen h = new HomeScreen(EList, i, a, s);
+					System.out.println(EList.EmployeeListSize());
+				} else {
+					JOptionPane.showMessageDialog(null,
+							"Incorrect password or username! ",
+							"EmployeeRoster", JOptionPane.PLAIN_MESSAGE);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

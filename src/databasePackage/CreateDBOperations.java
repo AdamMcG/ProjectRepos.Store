@@ -13,19 +13,20 @@ public class CreateDBOperations {
 	int i2 = 123456790;
 	int i = 2;
 	int empcounter;
+
 	public void openDB() {
 		try {
 			OracleDataSource ods = new OracleDataSource();
 
 			// home Database
-			 ods.setURL("jdbc:oracle:thin:proje/proje@localhost:1521/xe");
-			 ods.setUser("adam");
-			 ods.setPassword("luke1712");
+			ods.setURL("jdbc:oracle:thin:proje/proje@localhost:1521/xe");
+			ods.setUser("adam");
+			ods.setPassword("luke1712");
 
 			// Tallaght Database
-			//ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
-		//ods.setUser("X00098814");
-			//ods.setPassword("db11Feb95");
+			// ods.setURL("jdbc:oracle:thin:@//10.10.2.7:1521/global1");
+			// ods.setUser("X00098814");
+			// ods.setPassword("db11Feb95");
 
 			conn = ods.getConnection();
 			System.out.println("Connection has been opened.");
@@ -456,39 +457,33 @@ public class CreateDBOperations {
 		return rset;
 	}
 
-	
-	
-	
-	
-	
-	
 	public void addPass(User u) {
-	
-	String s2 = "INSERT INTO Password VALUES (?,?,?,?)";
-	try {
-		pstmt = conn.prepareStatement(s2);
-	} catch (SQLException e) {
 
-		e.printStackTrace();
-	}
-	// 'P123456789', 'Admin', 'SecretQ', 'SecretA'
-	// Row1
-	try {
-		String number = "P" + i2;
-		i2++;
-		pstmt.setString(1, number);
-		pstmt.setString(2, u.getPassword());
-		pstmt.setString(3, "SecretQ");
-		pstmt.setString(4, "SecretA");
-		pstmt.executeUpdate();
-	} catch (SQLException e) {
+		String s2 = "INSERT INTO Password VALUES (?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(s2);
+		} catch (SQLException e) {
 
-		e.printStackTrace();
+			e.printStackTrace();
+		}
+		// 'P123456789', 'Admin', 'SecretQ', 'SecretA'
+		// Row1
+		try {
+			String number = "P" + i2;
+			i2++;
+			pstmt.setString(1, number);
+			pstmt.setString(2, u.getPassword());
+			pstmt.setString(3, "SecretQ");
+			pstmt.setString(4, "SecretA");
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
 	}
-}
-public void addEmp(User u)
-{
-	
+
+	public void addEmp(User u) {
+
 		try {
 			String m = "n";
 			String a = "n";
@@ -500,22 +495,22 @@ public void addEmp(User u)
 					+ "Em_Address," + "Em_Isadmin, "
 					+ "Em_Manager) values(?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(queryString);
-			String contactLength = " " +(u.getContractLength());
-			
+			String contactLength = " " + (u.getContractLength());
+
 			pstmt.setString(1, u.getEmployeeNumber());
 			pstmt.setString(2, "D123456789");
 			pstmt.setString(3, "T123456789");
 			pstmt.setString(4, "C123456789");
 			pstmt.setString(5, "P123456789");
 			pstmt.setString(6, u.getName());
-			pstmt.setString(7, u.getName());
+			pstmt.setString(7, u.getLname());
 			pstmt.setString(8, u.getGender());
 			pstmt.setString(9, "Ireland");
 			pstmt.setString(10, contactLength);
 			pstmt.setString(11, "12");
 			pstmt.setString(12, "12");
 			pstmt.setString(13, "12");
-			pstmt.setString(14, "123 Fake st.");
+			pstmt.setString(14, u.getAddress());
 			pstmt.setString(15, m);
 			pstmt.setString(16, a);
 
@@ -525,6 +520,5 @@ public void addEmp(User u)
 			System.exit(1);
 		}
 	}
-	
 
 }

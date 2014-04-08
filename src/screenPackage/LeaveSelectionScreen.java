@@ -1,5 +1,7 @@
 package screenPackage;
 
+import hardCodePackage.EmployeeRegister;
+
 import java.awt.EventQueue;
 import java.awt.Frame;
 
@@ -13,23 +15,27 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 
+import databasePackage.CreateDBOperations;
+
 public class LeaveSelectionScreen extends JFrame implements ActionListener{
 	private JFrame frame;
 	private JButton continue1, cancel;
-	
-
-	/**
-	 * Create the application.
-	 */
-	public LeaveSelectionScreen() {
-
-		
+	private EmployeeRegister EList;
+	private ResultSet s;
+	private ResultSet s2;
+	private CreateDBOperations a;
+	private int employeeNum;
+	public LeaveSelectionScreen(int i, EmployeeRegister e, CreateDBOperations a2) {
+		this.EList =e;
+		this.employeeNum = i;
+		this.a = a2;
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.getContentPane().setLayout(null);
@@ -100,7 +106,7 @@ public class LeaveSelectionScreen extends JFrame implements ActionListener{
 		}
 		else if(ae.getSource() == cancel)
 		{
-			HomeScreen s = new HomeScreen(null, null);
+			HomeScreen s = new HomeScreen(EList, employeeNum, a, s2);
 			frame.setVisible(false);
 			
 		}

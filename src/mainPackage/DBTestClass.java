@@ -18,7 +18,7 @@ public class DBTestClass {
 		 a.dropTableContract();
 		 a.dropTableEmp();
 		 a.dropTablePassword();
-		a.buildtableDept(); // error here
+		a.buildtableDept(); 
 		a.buildTableContract();
 		a.buildTablePassword();
 		a.buildTableTeam();

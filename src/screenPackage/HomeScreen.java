@@ -33,12 +33,14 @@ public class HomeScreen extends JFrame implements ActionListener {
 	private ResultSet data;
 	private CreateDBOperations a;
 	private EmployeeRegister e;
+	private int i;
 
-	public HomeScreen(EmployeeRegister e, int i, CreateDBOperations a, ResultSet data) 
+	public HomeScreen(EmployeeRegister e, int employeeNum, CreateDBOperations a, ResultSet data) 
 	{
 		this.a = a;
 		this.data = data;
 		this.e = e;
+		this.i = employeeNum;
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
@@ -157,14 +159,14 @@ public class HomeScreen extends JFrame implements ActionListener {
 
 		else if (ae.getSource() == teamRoster) {
 			frame.dispose();
-			TeamScreen T = new TeamScreen();
+			TeamScreen T = new TeamScreen(i, e, a);
 
 		}
 
 		else if (ae.getSource() == leaveApp) 
 		{
 			frame.dispose();
-			LeaveSelectionScreen L = new LeaveSelectionScreen();
+			LeaveSelectionScreen L = new LeaveSelectionScreen(i, e, a);
 		}
 		else if (ae.getSource() == updateEmployee) {
 			String b = JOptionPane.showInputDialog(null,

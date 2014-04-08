@@ -2,7 +2,9 @@ package hardCodePackage;
 
 
 public class User {
-	private String name;
+	private String fname;
+	private String lname;
+	private String address; 
 	private String employeeNumber;
 	private String birthdate;
 	private String gender;
@@ -11,10 +13,12 @@ public class User {
 	private double contractLength;
 	private String department,password;
 
-	public User(String name, String gender, String nationality, String employeeNumber,
+	public User(String fname, String lname, String address, String gender, String nationality, String employeeNumber,
 			double contractLength, String employeeType, String password,
 			String department) {
-		this.setName(name);
+		this.setfName(fname);
+		this.setAddress(address);
+		this.setLname(lname);
 		this.setEmployeeNumber(employeeNumber);
 		this.employeeType = employeeType;
 		this.setGender(gender);
@@ -42,11 +46,11 @@ public class User {
 	}
 
 	public String getName() {
-		return name;
+		return fname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setfName(String fname) {
+		this.fname = fname;
 	}
 
 	public String getBirthdate() {
@@ -95,5 +99,21 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 
 import javax.swing.BorderFactory;
 import javax.swing.JTextField;
@@ -27,12 +28,16 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
+import databasePackage.CreateDBOperations;
+
 public class Advanced_Search_Screen extends JFrame implements ActionListener {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JButton search, cancel;
-
+	private ResultSet so;
+	private CreateDBOperations a;
+	
 	public Advanced_Search_Screen() {
 
 		frame = new JFrame();
@@ -119,7 +124,6 @@ public class Advanced_Search_Screen extends JFrame implements ActionListener {
 		if(ae.getSource()==cancel)
 		{
 			frame.dispose();
-			HomeScreen h = new HomeScreen(null, null);
 		}
 	}
 }

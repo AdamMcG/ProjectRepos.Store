@@ -26,8 +26,13 @@ public class EmployeeRegister {
 
 	}
 
-	public void removeEmployee() {
+	public void removeEmployee(String name) {
+		for (int i = 0; i < EmployeeListSize(); i++) {
+			if (name.equals(EmployeeList.get(i).getName())) {
+				EmployeeList.remove(i);
+			}
 
+		}
 	}
 
 	public int findEmployee(String name) {
@@ -63,9 +68,11 @@ public class EmployeeRegister {
 		try {
 			rset.beforeFirst();
 			while (rset.next() == true) {
-				String name = (rset.getString(6) + rset.getString(7));
-				User u = new User(name, rset.getString(8), rset.getString(9),
-						rset.getString(1), rset.getDouble(10), setStaff(rset),
+
+				User u = new User(rset.getString(6), rset.getString(7),
+						rset.getString("Em_Address"), rset.getString(8),
+						rset.getString(9), rset.getString(1),
+						rset.getDouble(10), setStaff(rset),
 						rsetPass.getString("password"),
 						rsetDep.getString("Dep_name"));
 				EmployeeList.add(u);
@@ -91,6 +98,7 @@ public class EmployeeRegister {
 					+ EmployeeList.get(i).getEmployeeType());
 
 		}
+		System.out.println(EmployeeList.size());
 	}
 
 	public String setStaff(ResultSet rset) {
@@ -123,5 +131,9 @@ public class EmployeeRegister {
 
 	public int EmployeeListSize() {
 		return EmployeeList.size();
+	}
+
+	public User ReturnEmployee(int i) {
+		return EmployeeList.get(i);
 	}
 }

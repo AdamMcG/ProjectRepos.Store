@@ -7,19 +7,13 @@ public class Manager extends User
 	private String groupTitle;
 	
 	
-	public Manager(String name, String gender, String nationality,
+	public Manager(String fname,String lname, String gender, String nationality,
 			double contractLength, String employeeType, String password,
 			String department) {
-		super(name, gender, nationality, department, contractLength,
+		super(fname, lname, gender, nationality, department, contractLength,
 				employeeType, password, department);
 
 	}
 
-	public void CreateGroup()
-	{
-		ArrayList<User> group = new ArrayList<User>();
-		
-	}
-	
 	
 }
